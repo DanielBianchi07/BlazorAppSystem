@@ -1,0 +1,73 @@
+﻿using BlazorApp.Api.Data;
+using BlazorApp.Shared.Handlers;
+using BlazorApp.Shared.Models;
+using BlazorApp.Shared.Requests.Alternativas;
+using BlazorApp.Shared.Responses;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata.Ecma335;
+
+
+        public async Task<Response<Alternativa?>> CreateAsync(CreateAlternativaRequest request)
+        {
+            var alterantiva = new Alternativa
+            {
+                
+            };
+
+            try
+            {
+                
+            }
+            catch
+            {
+                
+            }
+        }
+
+        public async Task<Response<Alternativa?>> DeleteAsync(DeleteAlternativaRequest request)
+        {
+            try
+            {
+                
+            }
+            catch
+            {
+                
+            }
+        }
+
+        public async Task<PagedResponse<List<Alternativa>?>> GetByQuestaoAsync(GetAlternativasByQuestaoRequest request)
+        {
+            try
+            {
+                
+            }
+            catch
+            {
+                
+            }
+        }
+
+        public async Task<Response<Alternativa?>> GetByIdAsync(GetAlternativaByIdRequest request)
+        {
+            try
+            {
+                
+            }
+            catch
+            {
+                
+            }
+        }
+
+        public async Task<Response<Alternativa?>> UpdateAsync(UpdateAlternativaRequest request)
+        {
+            try
+            {
+                
+            }
+            catch
+            {
+                
+            }
+        }
