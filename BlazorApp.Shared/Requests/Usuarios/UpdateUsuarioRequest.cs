@@ -11,12 +11,16 @@ namespace BlazorApp.Shared.Requests.Usuarios
     public class UpdateUsuarioRequest : Request
     {
         [Required(ErrorMessage = "Usuário Inválido")]
-        public string UsuarioId { get; set; } = string.Empty;
+        public Guid Id { get; set; }
+        [Required(ErrorMessage = "Email Inválido")]
+        public string Email { get; set; } = string.Empty;
         [Required(ErrorMessage = "Nome Inválido")]
         public string Nome { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Senha Inválida")]
         public string Senha { get; set; } = string.Empty;
+        [Required(ErrorMessage = "Status inválido")]
+        public EAtivoInativo Status { get; set; }
 
         public DateTime? DataAlteracao { get; set; } = DateTime.Now;
 

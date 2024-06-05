@@ -34,7 +34,5 @@ namespace BlazorApp.Shared.Requests.EnderecosEmpresas
 
         [Required(ErrorMessage = "Status Inválido")]
         public EAtivoInativo Status { get; set; } = EAtivoInativo.Ativo;
-        [Required(ErrorMessage = "Usuário Inválido")]
-        public string UsuarioId { get; set; }
     }
 }

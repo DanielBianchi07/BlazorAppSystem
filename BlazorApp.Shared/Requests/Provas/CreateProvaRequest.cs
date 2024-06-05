@@ -16,7 +16,5 @@ namespace BlazorApp.Shared.Requests.Provas
         public DateTime? DataCriacao { get; set; } = DateTime.Now;
         [Required(ErrorMessage = "Curso Inválido")]
         public Guid CursoId { get; set; }
-        [Required(ErrorMessage = "Usuário Inválido")]
-        public string UsuarioId { get; set; }
     }
 }

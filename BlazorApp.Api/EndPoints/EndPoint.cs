@@ -10,6 +10,9 @@ using BlazorApp.Api.EndPoints.Instrutores;
 using BlazorApp.Api.EndPoints.ListasPresencas;
 using BlazorApp.Api.EndPoints.Provas;
 using BlazorApp.Api.EndPoints.Questoes;
+using BlazorApp.Api.EndPoints.TelefonesEmpresas;
+using BlazorApp.Api.EndPoints.Treinamentos;
+using BlazorApp.Api.EndPoints.Usuarios;
 using Microsoft.AspNetCore.Routing;
 
 namespace BlazorApp.Api.EndPoints
@@ -116,6 +119,39 @@ namespace BlazorApp.Api.EndPoints
                 .MapEndPoint<GetQuestaoByProvaEndPoint>()
                 .MapEndPoint<UpdateQuestaoEndPoint>();
 
+            endpoints.MapGroup("v1/telefone-empresas")
+                .WithTags("telefone-empresas")
+                .MapEndPoint<CreateTelefoneEmpresaEndPoint>()
+                .MapEndPoint<DeleteTelefoneEmpresaEndPoint>()
+                .MapEndPoint<GetTelefoneEmpresaByIdEndPoint>()
+                .MapEndPoint<GetTelefoneByEmpresaEndPoint>()
+                .MapEndPoint<UpdateTelefoneEmpresaEndPoint>();
+
+            endpoints.MapGroup("v1/treinamentos")
+               .WithTags("treinamentos")
+               .MapEndPoint<CreateTreinamentoEndPoint>()
+               .MapEndPoint<UpdateTreinamentoEndPoint>()
+               .MapEndPoint<DeleteTreinamentoEndPoint>()
+               .MapEndPoint<GetAllTreinamentoEndPoint>()
+               .MapEndPoint<GetTreinamentoByDateEndPoint>()
+               .MapEndPoint<GetTreinamentoByIdEndPoint>()
+               .MapEndPoint<GetTreinamentoByAlunoEndPoint>()
+               .MapEndPoint<GetTreinamentoByAlunoByDateEndPoint>()
+               .MapEndPoint<GetTreinamentoByEmpresaEndPoint>()
+               .MapEndPoint<GetTreinamentoByEmpresaByDateEndPoint>()
+               .MapEndPoint<GetTreinamentoByInstrutorEndPoint>()
+               .MapEndPoint<GetTreinamentoByInstrutorByDateEndPoint>()
+               .MapEndPoint<GetTreinamentoBySituacaoEndPoint>();
+
+            endpoints.MapGroup("v1/usuarios")
+                .WithTags("usuarios")
+                .MapEndPoint<CreateUsuarioEndPoint>()
+                .MapEndPoint<DeleteUsuarioEndPoint>()
+                .MapEndPoint<GetAllUsuarioEndPoint>()
+                .MapEndPoint<GetByCredencialEndPoint>()
+                .MapEndPoint<GetUsuarioByIdEndPoint>()
+                .MapEndPoint<GetUsuarioAdminEndPoint>()
+                .MapEndPoint<UpdateUsuarioEndPoint>();
         }
 
         private static IEndpointRouteBuilder MapEndPoint<TEndPoint>(this IEndpointRouteBuilder app)

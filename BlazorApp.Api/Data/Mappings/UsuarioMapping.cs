@@ -10,9 +10,9 @@ namespace BlazorApp.Api.Data.Mappings
         {
             builder.ToTable("Usuario");
 
-            builder.HasKey(x => x.UsuarioId);
+            builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.UsuarioId)
+            builder.Property(x => x.Email)
                 .IsRequired(true)
                 .HasColumnType("VARCHAR")
                 .HasMaxLength(255);
@@ -25,7 +25,7 @@ namespace BlazorApp.Api.Data.Mappings
             builder.Property(x => x.Senha)
                 .IsRequired(true)
                 .HasColumnType("NVARCHAR")
-                .HasMaxLength(32);
+                .HasMaxLength(255);
 
             builder.Property(x => x.IsAdmin)
                 .IsRequired(true)

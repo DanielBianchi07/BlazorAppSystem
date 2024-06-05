@@ -19,7 +19,7 @@ namespace BlazorApp.Api.Handlers
                 Codigo = request.Codigo,
                 DataCriacao = request.DataCriacao,
                 Situacao = request.Situacao,
-                UsuarioId = request.UsuarioId,
+                CreatedBy = request.UsuarioId,
             };
 
             try
@@ -129,7 +129,7 @@ namespace BlazorApp.Api.Handlers
                 listaPresenca.DataAlteracao = request.DataAlteracao;
                 listaPresenca.DataInicioTreinamento = request.DataInicioTreinamento;
                 listaPresenca.Situacao = request.Situacao;
-                listaPresenca.UsuarioId = request.UsuarioId;
+                listaPresenca.UpdatedBy = request.UsuarioId;
 
                 context.ListasPresenca.Update(listaPresenca);
                 await context.SaveChangesAsync();

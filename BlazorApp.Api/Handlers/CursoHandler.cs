@@ -21,7 +21,7 @@ namespace BlazorApp.Api.Handlers
                 Validade = request.Validade,
                 Status = request.Status,
                 DataCriacao = request.DataCriacao,
-                UsuarioId = request.UsuarioId
+                CreatedBy = request.UsuarioId
             };
 
             try
@@ -114,7 +114,7 @@ namespace BlazorApp.Api.Handlers
                 curso.Validade = request.Validade;
                 curso.Status = request.Status;
                 curso.DataAlteracao = request.DataAlteracao;
-                curso.UsuarioId = request.UsuarioId;
+                curso.UpdatedBy = request.UsuarioId;
 
                 context.Cursos.Update(curso);
                 await context.SaveChangesAsync();

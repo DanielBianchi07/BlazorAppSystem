@@ -10,7 +10,7 @@ namespace BlazorApp.Api.EndPoints.ListasPresencas
     public class GetListaPresencaByDateEndPoint : IEndPoint
     {
         public static void Map(IEndpointRouteBuilder app)
-            => app.MapGet("/data/{dataInicial}/{dataFinal}", HandleAsync)
+            => app.MapGet("/data/{dataInicial}-{dataFinal}", HandleAsync)
                 .WithName("ListaPresenca: Get By Date")
                 .WithOrder(5)
                 .Produces<PagedResponse<List<ListaPresenca>?>>();

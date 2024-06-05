@@ -15,13 +15,12 @@ public class Empresa
 
     public EnderecoEmpresa EnderecoEmpresa { get; set; } = null;
     [JsonIgnore]
-    public ICollection<TelefoneEmpresa> TelefoneEmpresa { get; set; }
+    public ICollection<TelefoneEmpresa> TelefonesEmpresa { get; set; }
     [JsonIgnore]
     public ICollection<Treinamento> Treinamentos { get; set; }
     [JsonIgnore]
     public ICollection<Aluno> Alunos { get; set; }
 
-    public string UsuarioId { get; set; }
-    [JsonIgnore]
-    public ICollection<Usuario> Usuarios { get; set; }
+    public Guid CreatedBy { get; set; }
+    public Guid? UpdatedBy { get; set; }
 }

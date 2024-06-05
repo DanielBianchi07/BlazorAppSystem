@@ -22,8 +22,5 @@ namespace BlazorApp.Shared.Requests.ListasPresencas
         
         [Required(ErrorMessage = "Situação Inválida")]
         public ESituacaoCertificado Situacao { get; set; }
-
-        [Required(ErrorMessage = "Usuario Inválido")]
-        public string UsuarioId { get; set; }
     }
 }

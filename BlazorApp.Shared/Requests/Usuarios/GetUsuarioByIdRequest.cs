@@ -10,6 +10,6 @@ namespace BlazorApp.Shared.Requests.Usuarios
     public class GetusuarioByIdRequest : Request
     {
         [Required(ErrorMessage = "Usuário Inválido")]
-        public string UsuarioId { get; set; } = string.Empty;
+        public Guid Id { get; set; }
     }
 }

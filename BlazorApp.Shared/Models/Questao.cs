@@ -14,7 +14,6 @@ public class Questao
     [JsonIgnore]
     public ICollection<Alternativa> Alternativas { get; set; }
 
-    public string UsuarioId { get; set; }
-    [JsonIgnore]
-    public ICollection<Usuario> Usuarios { get; set; }
+    public Guid CreatedBy { get; set; }
+    public Guid? UpdatedBy { get; set; }
 }

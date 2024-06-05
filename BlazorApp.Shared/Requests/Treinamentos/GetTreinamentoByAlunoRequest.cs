@@ -9,7 +9,7 @@ namespace BlazorApp.Shared.Requests.Treinamentos
 {
     public class GetTreinamentoByAlunoRequest : PagedRequest
     {
-        [Required(ErrorMessage = "Empresa Inválido")]
+        [Required(ErrorMessage = "Aluno Inválido")]
         public Guid AlunoId { get; set; }
     }
 }

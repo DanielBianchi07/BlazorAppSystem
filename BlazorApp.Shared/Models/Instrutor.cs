@@ -17,10 +17,10 @@ namespace BlazorApp.Shared.Models
         public DateTime? DataCriacao { get; set; } = null;
         public DateTime? DataAlteracao { get; set; } = null;
 
+        [JsonIgnore]
         public ICollection<Treinamento> Treinamentos { get; set; }
 
-        public string UsuarioId { get; set; }
-        [JsonIgnore]
-        public ICollection<Usuario> Usuarios { get; set; }
+        public Guid CreatedBy { get; set; }
+        public Guid? UpdatedBy { get; set; }
     }
 }

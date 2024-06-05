@@ -20,7 +20,5 @@ namespace BlazorApp.Shared.Requests.Alternativas
         public ERespostaAlternativa Resposta { get; set; } = ERespostaAlternativa.Errada;
         [Required(ErrorMessage = "Status Inválido")]
         public EAtivoInativo Status { get; set; } = EAtivoInativo.Ativo;
-        [Required(ErrorMessage = "Usuário Inválido")]
-        public string UsuarioId { get; set; }
     }
 }

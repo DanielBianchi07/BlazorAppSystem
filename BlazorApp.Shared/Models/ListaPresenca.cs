@@ -12,7 +12,7 @@ public class ListaPresenca
     public DateTime? DataAlteracao { get; set; } = null;
     public DateTime? DataInicioTreinamento { get; set; } = null;
     public ESituacaoCertificado Situacao { get; set; } = ESituacaoCertificado.Processando;
-    public string UsuarioId { get; set; }
-    [JsonIgnore]
-    public ICollection<Usuario> Usuarios { get; set; }
+
+    public Guid CreatedBy { get; set; }
+    public Guid? UpdatedBy { get; set; }
 }

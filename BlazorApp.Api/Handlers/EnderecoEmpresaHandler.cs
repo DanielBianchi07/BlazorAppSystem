@@ -22,7 +22,7 @@ namespace BlazorApp.Api.Handlers
                 Numero = request.Numero,
                 Complemento = request.Complemento,
                 Status = request.Status,
-                UsuarioId = request.UsuarioId,
+                CreatedBy = request.UsuarioId,
             };
 
             try
@@ -47,6 +47,7 @@ namespace BlazorApp.Api.Handlers
                 if (enderecoEmpresa == null)
                     return new Response<EnderecoEmpresa?>(null, 404, "Endereço não encontrado para remoção");
                 enderecoEmpresa.Status = Shared.Enums.EAtivoInativo.Inativo;
+                context.EnderecosEmpresa.Update(enderecoEmpresa); 
                 await context.SaveChangesAsync();
 
                 return new Response<EnderecoEmpresa?>(enderecoEmpresa, message: "Endereço removido com sucesso!");
@@ -92,7 +93,7 @@ namespace BlazorApp.Api.Handlers
                 enderecoEmpresa.Numero = request.Numero;
                 enderecoEmpresa.Complemento = request.Complemento;
                 enderecoEmpresa.Status = request.Status;
-                enderecoEmpresa.UsuarioId = request.UsuarioId;
+                enderecoEmpresa.UpdatedBy = request.UsuarioId;
 
                 context.EnderecosEmpresa.Update(enderecoEmpresa);
                 await context.SaveChangesAsync();

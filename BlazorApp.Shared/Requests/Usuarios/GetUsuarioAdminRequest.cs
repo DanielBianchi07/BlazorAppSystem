@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlazorApp.Shared.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,6 +11,6 @@ namespace BlazorApp.Shared.Requests.Usuarios
     public class GetUsuarioAdminRequest : PagedRequest
     {
         [Required(ErrorMessage = "Definição de Admin Inválida")]
-        public int IsAdmin { get; set; }
+        public EAtivoInativo IsAdmin { get; set; }
     }
 }

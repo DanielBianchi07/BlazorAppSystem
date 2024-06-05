@@ -13,7 +13,7 @@ namespace BlazorApp.Api.EndPoints.EnderecosEmpresas
             => app.MapPut("/{empresaId}", HandleAsync)
             .WithName("EnderecoEmpresa: Update")
             .WithOrder(2)
-            .Produces<Response<Curso?>>();
+            .Produces<Response<EnderecoEmpresa?>>();
         private static async Task<IResult> HandleAsync(IEnderecoEmpresaHandler handler, UpdateEnderecoEmpresaRequest request, Guid empresaId)
         {
             request.EmpresaId = empresaId;

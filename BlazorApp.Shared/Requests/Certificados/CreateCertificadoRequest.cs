@@ -19,7 +19,5 @@ namespace BlazorApp.Shared.Requests.Certificados
         public DateTime? DataCriacao { get; set; } = DateTime.Now;
         [Required(ErrorMessage = "Situação Inválida")]
         public ESituacaoCertificado Situacao { get; set; } = ESituacaoCertificado.Processando;
-        [Required(ErrorMessage = "Usuário Inválido")]
-        public string UsuarioId { get; set; }
     }
 }

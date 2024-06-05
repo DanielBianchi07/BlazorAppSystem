@@ -32,8 +32,5 @@ namespace BlazorApp.Shared.Requests.Treinamentos
         public Guid AlunoId { get; set; }
         [Required(ErrorMessage = "Instrutor Inválido")]
         public Guid InstrutorId { get; set; }
-
-        [Required(ErrorMessage = "Usuário Inválido")]
-        public Guid UsuarioId { get; set; }
     }
 }

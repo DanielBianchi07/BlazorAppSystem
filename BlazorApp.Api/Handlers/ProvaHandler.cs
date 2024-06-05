@@ -16,7 +16,7 @@ namespace BlazorApp.Api.Handlers
                 CursoId = request.CursoId,
                 DataCriacao = request.DataCriacao,
                 Status = request.Status,
-                UsuarioId = request.UsuarioId
+                CreatedBy = request.UsuarioId
             };
 
             try
@@ -128,7 +128,7 @@ namespace BlazorApp.Api.Handlers
                     return new Response<Prova?>(null, 404, "Prova não encontrada para atualizar");
                 prova.DataAlteracao = request.DataAlteracao;
                 prova.Status = request.Status;
-                prova.UsuarioId = request.UsuarioId;
+                prova.UpdatedBy = request.UsuarioId;
 
                 context.Provas.Update(prova);
                 await context.SaveChangesAsync();

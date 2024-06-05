@@ -22,21 +22,6 @@ namespace BlazorApp.Api.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("AlternativaUsuario", b =>
-                {
-                    b.Property<Guid>("AlternativasId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UsuariosUsuarioId")
-                        .HasColumnType("VARCHAR(255)");
-
-                    b.HasKey("AlternativasId", "UsuariosUsuarioId");
-
-                    b.HasIndex("UsuariosUsuarioId");
-
-                    b.ToTable("AlternativaUsuario");
-                });
-
             modelBuilder.Entity("AlunoEmpresa", b =>
                 {
                     b.Property<Guid>("AlunosId")
@@ -67,21 +52,6 @@ namespace BlazorApp.Api.Migrations
                     b.ToTable("AlunoTreinamento");
                 });
 
-            modelBuilder.Entity("AlunoUsuario", b =>
-                {
-                    b.Property<Guid>("AlunosId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UsuariosUsuarioId")
-                        .HasColumnType("VARCHAR(255)");
-
-                    b.HasKey("AlunosId", "UsuariosUsuarioId");
-
-                    b.HasIndex("UsuariosUsuarioId");
-
-                    b.ToTable("AlunoUsuario");
-                });
-
             modelBuilder.Entity("BlazorApp.Shared.Models.Alternativa", b =>
                 {
                     b.Property<Guid>("Id")
@@ -93,6 +63,9 @@ namespace BlazorApp.Api.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("NVARCHAR");
 
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("QuestaoId")
                         .HasColumnType("uniqueidentifier");
 
@@ -102,26 +75,14 @@ namespace BlazorApp.Api.Migrations
                     b.Property<short>("Status")
                         .HasColumnType("SMALLINT");
 
-                    b.Property<string>("UsuarioId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("QuestaoId");
 
                     b.ToTable("Alternativa", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("8d7e2f3c-0d29-4d61-97f1-3453b6f7d631"),
-                            Conteudo = "alternativa A",
-                            QuestaoId = new Guid("b5aefd22-7c2e-42e5-9316-8f09d5f2c0f1"),
-                            Resposta = (short)1,
-                            Status = (short)1,
-                            UsuarioId = "UsuarioTeste01@teste.com"
-                        });
                 });
 
             modelBuilder.Entity("BlazorApp.Shared.Models.Aluno", b =>
@@ -139,6 +100,9 @@ namespace BlazorApp.Api.Migrations
                         .IsRequired()
                         .HasMaxLength(14)
                         .HasColumnType("VARCHAR");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("DataAlteracao")
                         .HasColumnType("datetime2");
@@ -169,28 +133,12 @@ namespace BlazorApp.Api.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("VARCHAR");
 
-                    b.Property<string>("UsuarioId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.ToTable("Aluno", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("1b5d254e-45cb-4c4f-8fd7-c1e2f5a15f2d"),
-                            Assinatura = "Assin1",
-                            Cpf = "000.111.00011",
-                            DataCriacao = new DateTime(2024, 6, 3, 23, 54, 35, 791, DateTimeKind.Local).AddTicks(2267),
-                            Email = "",
-                            Nome = "Aluno Teste 1",
-                            Rg = "",
-                            Status = 1,
-                            Telefone = "",
-                            UsuarioId = "UsuarioTeste01@teste.com"
-                        });
                 });
 
             modelBuilder.Entity("BlazorApp.Shared.Models.Certificado", b =>
@@ -201,6 +149,9 @@ namespace BlazorApp.Api.Migrations
                     b.Property<string>("Codigo")
                         .HasMaxLength(32)
                         .HasColumnType("VARCHAR");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("DataAlteracao")
                         .HasColumnType("datetime2");
@@ -214,9 +165,8 @@ namespace BlazorApp.Api.Migrations
                     b.Property<short>("Situacao")
                         .HasColumnType("SMALLINT");
 
-                    b.Property<string>("UsuarioId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("TreinamentoId", "Codigo");
 
@@ -237,6 +187,9 @@ namespace BlazorApp.Api.Migrations
                     b.Property<short>("CargaHoraria")
                         .HasColumnType("SMALLINT");
 
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("CursoId")
                         .HasColumnType("uniqueidentifier");
 
@@ -249,9 +202,8 @@ namespace BlazorApp.Api.Migrations
                     b.Property<short>("Status")
                         .HasColumnType("SMALLINT");
 
-                    b.Property<string>("UsuarioId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -272,6 +224,9 @@ namespace BlazorApp.Api.Migrations
                     b.Property<short>("CargaHorariaPeriodico")
                         .HasColumnType("SMALLINT");
 
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime?>("DataAlteracao")
                         .HasColumnType("datetime2");
 
@@ -291,9 +246,8 @@ namespace BlazorApp.Api.Migrations
                     b.Property<short>("Status")
                         .HasColumnType("SMALLINT");
 
-                    b.Property<string>("UsuarioId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<short>("Validade")
                         .HasColumnType("SMALLINT");
@@ -301,20 +255,6 @@ namespace BlazorApp.Api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Curso", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("9c6a17fd-8d5a-4f68-a6d1-5e9f8a2f4c17"),
-                            CargaHorariaInicial = (short)4,
-                            CargaHorariaPeriodico = (short)8,
-                            DataCriacao = new DateTime(2024, 6, 3, 23, 54, 35, 791, DateTimeKind.Local).AddTicks(2706),
-                            Logo = "",
-                            Nome = "Curso Teste 01",
-                            Status = (short)1,
-                            UsuarioId = "UsuarioTeste01@teste.com",
-                            Validade = (short)2
-                        });
                 });
 
             modelBuilder.Entity("BlazorApp.Shared.Models.Empresa", b =>
@@ -327,6 +267,9 @@ namespace BlazorApp.Api.Migrations
                         .IsRequired()
                         .HasMaxLength(19)
                         .HasColumnType("NVARCHAR");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("DataAlteracao")
                         .HasColumnType("datetime2");
@@ -347,25 +290,12 @@ namespace BlazorApp.Api.Migrations
                     b.Property<short>("Status")
                         .HasColumnType("SMALLINT");
 
-                    b.Property<string>("UsuarioId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.ToTable("Empresa", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("7a9e5f7d-2c6e-4a1b-bc3f-4d5a1e2f5b6c"),
-                            CNPJ = "11.000.111/0001-10",
-                            DataCriacao = new DateTime(2024, 6, 3, 23, 54, 35, 791, DateTimeKind.Local).AddTicks(3520),
-                            Email = "",
-                            RazaoSocial = "Empresa Teste 01",
-                            Status = (short)1,
-                            UsuarioId = "UsuarioTeste01@teste.com"
-                        });
                 });
 
             modelBuilder.Entity("BlazorApp.Shared.Models.EnderecoEmpresa", b =>
@@ -392,6 +322,9 @@ namespace BlazorApp.Api.Migrations
                         .HasMaxLength(160)
                         .HasColumnType("NVARCHAR");
 
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Estado")
                         .IsRequired()
                         .HasMaxLength(48)
@@ -410,9 +343,8 @@ namespace BlazorApp.Api.Migrations
                     b.Property<short>("Status")
                         .HasColumnType("SMALLINT");
 
-                    b.Property<string>("UsuarioId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("EmpresaId");
 
@@ -434,6 +366,9 @@ namespace BlazorApp.Api.Migrations
                         .IsRequired()
                         .HasMaxLength(14)
                         .HasColumnType("VARCHAR");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("DataAlteracao")
                         .HasColumnType("datetime2");
@@ -469,29 +404,12 @@ namespace BlazorApp.Api.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("VARCHAR");
 
-                    b.Property<string>("UsuarioId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.ToTable("Instrutor", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("2f1b6d4e-8e7f-4a5d-9f1c-7c3e5d6b8f1a"),
-                            Assinatura = "",
-                            Cpf = "222.000.22202",
-                            DataCriacao = new DateTime(2024, 6, 3, 23, 54, 35, 791, DateTimeKind.Local).AddTicks(3753),
-                            Email = "",
-                            Especializacao = "Técnico de Segurança",
-                            Nome = "Instrutor Teste 01",
-                            Registro = "CAEPF01/542",
-                            Status = (short)1,
-                            Telefone = "(11) 991276269",
-                            UsuarioId = "UsuarioTeste01@teste.com"
-                        });
                 });
 
             modelBuilder.Entity("BlazorApp.Shared.Models.ListaPresenca", b =>
@@ -503,6 +421,9 @@ namespace BlazorApp.Api.Migrations
                         .IsRequired()
                         .HasMaxLength(32)
                         .HasColumnType("VARCHAR");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("DataAlteracao")
                         .HasColumnType("datetime2");
@@ -516,9 +437,8 @@ namespace BlazorApp.Api.Migrations
                     b.Property<short>("Situacao")
                         .HasColumnType("SMALLINT");
 
-                    b.Property<string>("UsuarioId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("TreinamentoId");
 
@@ -529,6 +449,9 @@ namespace BlazorApp.Api.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CursoId")
@@ -543,25 +466,14 @@ namespace BlazorApp.Api.Migrations
                     b.Property<short>("Status")
                         .HasColumnType("SMALLINT");
 
-                    b.Property<string>("UsuarioId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CursoId");
 
                     b.ToTable("Prova", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("3e6d2f3a-5f57-4c97-85c1-8f5d1b6c4d71"),
-                            CursoId = new Guid("9c6a17fd-8d5a-4f68-a6d1-5e9f8a2f4c17"),
-                            DataCriacao = new DateTime(2024, 6, 3, 23, 54, 35, 791, DateTimeKind.Local).AddTicks(2850),
-                            Status = (short)1,
-                            UsuarioId = "UsuarioTeste01@teste.com"
-                        });
                 });
 
             modelBuilder.Entity("BlazorApp.Shared.Models.Questao", b =>
@@ -575,50 +487,51 @@ namespace BlazorApp.Api.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("NVARCHAR");
 
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("ProvaId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<short>("Status")
                         .HasColumnType("SMALLINT");
 
-                    b.Property<string>("UsuarioId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProvaId");
 
                     b.ToTable("Questao", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("b5aefd22-7c2e-42e5-9316-8f09d5f2c0f1"),
-                            Conteudo = "Questao 01",
-                            ProvaId = new Guid("3e6d2f3a-5f57-4c97-85c1-8f5d1b6c4d71"),
-                            Status = (short)1,
-                            UsuarioId = "UsuarioTeste01@teste.com"
-                        });
                 });
 
             modelBuilder.Entity("BlazorApp.Shared.Models.TelefoneEmpresa", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("EmpresaId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("NroTelefone")
+                        .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("VARCHAR");
 
                     b.Property<short>("Status")
                         .HasColumnType("SMALLINT");
 
-                    b.Property<string>("UsuarioId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("EmpresaId", "NroTelefone");
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmpresaId");
 
                     b.ToTable("TelefoneEmpresa", (string)null);
                 });
@@ -627,6 +540,9 @@ namespace BlazorApp.Api.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CursoId")
@@ -647,40 +563,32 @@ namespace BlazorApp.Api.Migrations
                     b.Property<short>("Tipo")
                         .HasColumnType("SMALLINT");
 
-                    b.Property<string>("UsuarioId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CursoId");
 
                     b.ToTable("Treinamento", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("d4f354e8-6e64-4b2c-91f5-99c5a6e5d7c1"),
-                            CursoId = new Guid("9c6a17fd-8d5a-4f68-a6d1-5e9f8a2f4c17"),
-                            DataCriacao = new DateTime(2024, 6, 3, 23, 54, 35, 791, DateTimeKind.Local).AddTicks(2573),
-                            Situacao = (short)1,
-                            Status = (short)1,
-                            Tipo = (short)1,
-                            UsuarioId = "UsuarioTeste01@teste.com"
-                        });
                 });
 
             modelBuilder.Entity("BlazorApp.Shared.Models.Usuario", b =>
                 {
-                    b.Property<string>("UsuarioId")
-                        .HasMaxLength(255)
-                        .HasColumnType("VARCHAR");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("DataAlteracao")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DataCriacao")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("VARCHAR");
 
                     b.Property<short>("IsAdmin")
                         .HasColumnType("SMALLINT");
@@ -692,83 +600,15 @@ namespace BlazorApp.Api.Migrations
 
                     b.Property<string>("Senha")
                         .IsRequired()
-                        .HasMaxLength(32)
+                        .HasMaxLength(255)
                         .HasColumnType("NVARCHAR");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.HasKey("UsuarioId");
+                    b.HasKey("Id");
 
                     b.ToTable("Usuario", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UsuarioId = "UsuarioTeste01@teste.com",
-                            DataCriacao = new DateTime(2024, 6, 3, 23, 54, 35, 791, DateTimeKind.Local).AddTicks(3879),
-                            IsAdmin = (short)1,
-                            Nome = "Usuario 01",
-                            Senha = "aqgbpo22",
-                            Status = 1
-                        },
-                        new
-                        {
-                            UsuarioId = "TesteUsuario02@teste.com",
-                            DataCriacao = new DateTime(2024, 6, 3, 23, 54, 35, 791, DateTimeKind.Local).AddTicks(3887),
-                            IsAdmin = (short)1,
-                            Nome = "Usuario 02",
-                            Senha = "aqgbpo23",
-                            Status = 1
-                        });
-                });
-
-            modelBuilder.Entity("CertificadoUsuario", b =>
-                {
-                    b.Property<string>("UsuariosUsuarioId")
-                        .HasColumnType("VARCHAR(255)");
-
-                    b.Property<Guid>("CertificadosTreinamentoId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("CertificadosCodigo")
-                        .HasColumnType("VARCHAR(32)");
-
-                    b.HasKey("UsuariosUsuarioId", "CertificadosTreinamentoId", "CertificadosCodigo");
-
-                    b.HasIndex("CertificadosTreinamentoId", "CertificadosCodigo");
-
-                    b.ToTable("CertificadoUsuario");
-                });
-
-            modelBuilder.Entity("ConteudoProgramaticoUsuario", b =>
-                {
-                    b.Property<Guid>("ConteudosProgramaticosId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UsuariosUsuarioId")
-                        .HasColumnType("VARCHAR(255)");
-
-                    b.HasKey("ConteudosProgramaticosId", "UsuariosUsuarioId");
-
-                    b.HasIndex("UsuariosUsuarioId");
-
-                    b.ToTable("ConteudoProgramaticoUsuario");
-                });
-
-            modelBuilder.Entity("CursoUsuario", b =>
-                {
-                    b.Property<Guid>("CursosId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UsuariosUsuarioId")
-                        .HasColumnType("VARCHAR(255)");
-
-                    b.HasKey("CursosId", "UsuariosUsuarioId");
-
-                    b.HasIndex("UsuariosUsuarioId");
-
-                    b.ToTable("CursoUsuario");
                 });
 
             modelBuilder.Entity("EmpresaTreinamento", b =>
@@ -786,36 +626,6 @@ namespace BlazorApp.Api.Migrations
                     b.ToTable("EmpresaTreinamento");
                 });
 
-            modelBuilder.Entity("EmpresaUsuario", b =>
-                {
-                    b.Property<Guid>("EmpresasId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UsuariosUsuarioId")
-                        .HasColumnType("VARCHAR(255)");
-
-                    b.HasKey("EmpresasId", "UsuariosUsuarioId");
-
-                    b.HasIndex("UsuariosUsuarioId");
-
-                    b.ToTable("EmpresaUsuario");
-                });
-
-            modelBuilder.Entity("EnderecoEmpresaUsuario", b =>
-                {
-                    b.Property<Guid>("EnderecosEmpresasEmpresaId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UsuariosUsuarioId")
-                        .HasColumnType("VARCHAR(255)");
-
-                    b.HasKey("EnderecosEmpresasEmpresaId", "UsuariosUsuarioId");
-
-                    b.HasIndex("UsuariosUsuarioId");
-
-                    b.ToTable("EnderecoEmpresaUsuario");
-                });
-
             modelBuilder.Entity("InstrutorTreinamento", b =>
                 {
                     b.Property<Guid>("InstrutoresId")
@@ -829,114 +639,6 @@ namespace BlazorApp.Api.Migrations
                     b.HasIndex("TreinamentosId");
 
                     b.ToTable("InstrutorTreinamento");
-                });
-
-            modelBuilder.Entity("InstrutorUsuario", b =>
-                {
-                    b.Property<Guid>("InstrutoresId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UsuariosUsuarioId")
-                        .HasColumnType("VARCHAR(255)");
-
-                    b.HasKey("InstrutoresId", "UsuariosUsuarioId");
-
-                    b.HasIndex("UsuariosUsuarioId");
-
-                    b.ToTable("InstrutorUsuario");
-                });
-
-            modelBuilder.Entity("ListaPresencaUsuario", b =>
-                {
-                    b.Property<Guid>("ListasPresescasTreinamentoId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UsuariosUsuarioId")
-                        .HasColumnType("VARCHAR(255)");
-
-                    b.HasKey("ListasPresescasTreinamentoId", "UsuariosUsuarioId");
-
-                    b.HasIndex("UsuariosUsuarioId");
-
-                    b.ToTable("ListaPresencaUsuario");
-                });
-
-            modelBuilder.Entity("ProvaUsuario", b =>
-                {
-                    b.Property<Guid>("ProvasId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UsuariosUsuarioId")
-                        .HasColumnType("VARCHAR(255)");
-
-                    b.HasKey("ProvasId", "UsuariosUsuarioId");
-
-                    b.HasIndex("UsuariosUsuarioId");
-
-                    b.ToTable("ProvaUsuario");
-                });
-
-            modelBuilder.Entity("QuestaoUsuario", b =>
-                {
-                    b.Property<Guid>("QuestoesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UsuariosUsuarioId")
-                        .HasColumnType("VARCHAR(255)");
-
-                    b.HasKey("QuestoesId", "UsuariosUsuarioId");
-
-                    b.HasIndex("UsuariosUsuarioId");
-
-                    b.ToTable("QuestaoUsuario");
-                });
-
-            modelBuilder.Entity("TelefoneEmpresaUsuario", b =>
-                {
-                    b.Property<string>("UsuariosUsuarioId")
-                        .HasColumnType("VARCHAR(255)");
-
-                    b.Property<Guid>("TelefonesEmpresasEmpresaId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("TelefonesEmpresasNroTelefone")
-                        .HasColumnType("VARCHAR(15)");
-
-                    b.HasKey("UsuariosUsuarioId", "TelefonesEmpresasEmpresaId", "TelefonesEmpresasNroTelefone");
-
-                    b.HasIndex("TelefonesEmpresasEmpresaId", "TelefonesEmpresasNroTelefone");
-
-                    b.ToTable("TelefoneEmpresaUsuario");
-                });
-
-            modelBuilder.Entity("TreinamentoUsuario", b =>
-                {
-                    b.Property<Guid>("TreinamentosId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UsuariosUsuarioId")
-                        .HasColumnType("VARCHAR(255)");
-
-                    b.HasKey("TreinamentosId", "UsuariosUsuarioId");
-
-                    b.HasIndex("UsuariosUsuarioId");
-
-                    b.ToTable("TreinamentoUsuario");
-                });
-
-            modelBuilder.Entity("AlternativaUsuario", b =>
-                {
-                    b.HasOne("BlazorApp.Shared.Models.Alternativa", null)
-                        .WithMany()
-                        .HasForeignKey("AlternativasId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BlazorApp.Shared.Models.Usuario", null)
-                        .WithMany()
-                        .HasForeignKey("UsuariosUsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("AlunoEmpresa", b =>
@@ -965,21 +667,6 @@ namespace BlazorApp.Api.Migrations
                     b.HasOne("BlazorApp.Shared.Models.Treinamento", null)
                         .WithMany()
                         .HasForeignKey("TreinamentosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("AlunoUsuario", b =>
-                {
-                    b.HasOne("BlazorApp.Shared.Models.Aluno", null)
-                        .WithMany()
-                        .HasForeignKey("AlunosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BlazorApp.Shared.Models.Usuario", null)
-                        .WithMany()
-                        .HasForeignKey("UsuariosUsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1064,7 +751,7 @@ namespace BlazorApp.Api.Migrations
             modelBuilder.Entity("BlazorApp.Shared.Models.TelefoneEmpresa", b =>
                 {
                     b.HasOne("BlazorApp.Shared.Models.Empresa", "Empresa")
-                        .WithMany("TelefoneEmpresa")
+                        .WithMany("TelefonesEmpresa")
                         .HasForeignKey("EmpresaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1083,51 +770,6 @@ namespace BlazorApp.Api.Migrations
                     b.Navigation("Curso");
                 });
 
-            modelBuilder.Entity("CertificadoUsuario", b =>
-                {
-                    b.HasOne("BlazorApp.Shared.Models.Usuario", null)
-                        .WithMany()
-                        .HasForeignKey("UsuariosUsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BlazorApp.Shared.Models.Certificado", null)
-                        .WithMany()
-                        .HasForeignKey("CertificadosTreinamentoId", "CertificadosCodigo")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ConteudoProgramaticoUsuario", b =>
-                {
-                    b.HasOne("BlazorApp.Shared.Models.ConteudoProgramatico", null)
-                        .WithMany()
-                        .HasForeignKey("ConteudosProgramaticosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BlazorApp.Shared.Models.Usuario", null)
-                        .WithMany()
-                        .HasForeignKey("UsuariosUsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("CursoUsuario", b =>
-                {
-                    b.HasOne("BlazorApp.Shared.Models.Curso", null)
-                        .WithMany()
-                        .HasForeignKey("CursosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BlazorApp.Shared.Models.Usuario", null)
-                        .WithMany()
-                        .HasForeignKey("UsuariosUsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("EmpresaTreinamento", b =>
                 {
                     b.HasOne("BlazorApp.Shared.Models.Empresa", null)
@@ -1139,36 +781,6 @@ namespace BlazorApp.Api.Migrations
                     b.HasOne("BlazorApp.Shared.Models.Treinamento", null)
                         .WithMany()
                         .HasForeignKey("TreinamentosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("EmpresaUsuario", b =>
-                {
-                    b.HasOne("BlazorApp.Shared.Models.Empresa", null)
-                        .WithMany()
-                        .HasForeignKey("EmpresasId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BlazorApp.Shared.Models.Usuario", null)
-                        .WithMany()
-                        .HasForeignKey("UsuariosUsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("EnderecoEmpresaUsuario", b =>
-                {
-                    b.HasOne("BlazorApp.Shared.Models.EnderecoEmpresa", null)
-                        .WithMany()
-                        .HasForeignKey("EnderecosEmpresasEmpresaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BlazorApp.Shared.Models.Usuario", null)
-                        .WithMany()
-                        .HasForeignKey("UsuariosUsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1188,96 +800,6 @@ namespace BlazorApp.Api.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("InstrutorUsuario", b =>
-                {
-                    b.HasOne("BlazorApp.Shared.Models.Instrutor", null)
-                        .WithMany()
-                        .HasForeignKey("InstrutoresId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BlazorApp.Shared.Models.Usuario", null)
-                        .WithMany()
-                        .HasForeignKey("UsuariosUsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ListaPresencaUsuario", b =>
-                {
-                    b.HasOne("BlazorApp.Shared.Models.ListaPresenca", null)
-                        .WithMany()
-                        .HasForeignKey("ListasPresescasTreinamentoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BlazorApp.Shared.Models.Usuario", null)
-                        .WithMany()
-                        .HasForeignKey("UsuariosUsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ProvaUsuario", b =>
-                {
-                    b.HasOne("BlazorApp.Shared.Models.Prova", null)
-                        .WithMany()
-                        .HasForeignKey("ProvasId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BlazorApp.Shared.Models.Usuario", null)
-                        .WithMany()
-                        .HasForeignKey("UsuariosUsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("QuestaoUsuario", b =>
-                {
-                    b.HasOne("BlazorApp.Shared.Models.Questao", null)
-                        .WithMany()
-                        .HasForeignKey("QuestoesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BlazorApp.Shared.Models.Usuario", null)
-                        .WithMany()
-                        .HasForeignKey("UsuariosUsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("TelefoneEmpresaUsuario", b =>
-                {
-                    b.HasOne("BlazorApp.Shared.Models.Usuario", null)
-                        .WithMany()
-                        .HasForeignKey("UsuariosUsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BlazorApp.Shared.Models.TelefoneEmpresa", null)
-                        .WithMany()
-                        .HasForeignKey("TelefonesEmpresasEmpresaId", "TelefonesEmpresasNroTelefone")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("TreinamentoUsuario", b =>
-                {
-                    b.HasOne("BlazorApp.Shared.Models.Treinamento", null)
-                        .WithMany()
-                        .HasForeignKey("TreinamentosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BlazorApp.Shared.Models.Usuario", null)
-                        .WithMany()
-                        .HasForeignKey("UsuariosUsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("BlazorApp.Shared.Models.Curso", b =>
                 {
                     b.Navigation("ConteudosProgramaticos");
@@ -1292,7 +814,7 @@ namespace BlazorApp.Api.Migrations
                     b.Navigation("EnderecoEmpresa")
                         .IsRequired();
 
-                    b.Navigation("TelefoneEmpresa");
+                    b.Navigation("TelefonesEmpresa");
                 });
 
             modelBuilder.Entity("BlazorApp.Shared.Models.Prova", b =>

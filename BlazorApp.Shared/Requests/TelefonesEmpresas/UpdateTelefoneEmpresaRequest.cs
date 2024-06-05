@@ -1,24 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BlazorApp.Shared.Enums;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BlazorApp.Shared.Requests.TelefonesEmpresas
 {
     public class UpdateTelefoneEmpresaRequest : Request
     {
-        [Required(ErrorMessage = "Empresa Inválida")]
-        public Guid EmpresaId { get; set; }
+        [Required(ErrorMessage = "Telefone Inválido")]
+        public Guid Id { get; set; }
 
         [Required(ErrorMessage = "Número de Telefone Inválido")]
         public string NroTelefone { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Status Inválido")]
-        public int Status { get; set; }
-
-        [Required(ErrorMessage = "Usuario Inválido")]
-        public Guid UsuarioId { get; set; }
+        public EAtivoInativo Status { get; set; }
     }
 }

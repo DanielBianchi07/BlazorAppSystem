@@ -9,10 +9,10 @@ namespace BlazorApp.Shared.Requests.TelefonesEmpresas
 {
     public class DeleteTelefoneEmpresaRequest : Request
     {
+        [Required(ErrorMessage = "Telefone Inválido")]
+        public Guid Id { get; set; }
+
         [Required(ErrorMessage = "Empresa Inválida")]
         public Guid EmpresaId { get; set; }
-
-        [Required(ErrorMessage = "Número de Telefone Inválido")]
-        public string NroTelefone { get; set; } = string.Empty;
     }
 }

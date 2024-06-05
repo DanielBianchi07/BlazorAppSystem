@@ -21,8 +21,5 @@ namespace BlazorApp.Shared.Requests.ListasPresencas
         public DateTime? DataInicioTreinamento { get; set; }
         [Required(ErrorMessage = "Situação Inválida")]
         public ESituacaoCertificado Situacao { get; set; }
-
-        [Required(ErrorMessage = "Usuario Inválido")]
-        public string UsuarioId { get; set; }
     }
 }

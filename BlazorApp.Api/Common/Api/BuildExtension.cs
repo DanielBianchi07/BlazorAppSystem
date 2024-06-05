@@ -58,6 +58,9 @@ namespace BlazorApp.Api.Common.Api
             builder.Services.AddTransient<IListaPresencaHandler, listaPresencaHandler>();
             builder.Services.AddTransient<IProvaHandler, ProvaHandler>();
             builder.Services.AddTransient<IQuestaoHandler, QuestaoHandler>();
+            builder.Services.AddTransient<ITelefoneEmpresaHandler, TelefoneEmpresaHandler>();
+            builder.Services.AddTransient<ITreinamentoHandler, TreinamentoHandler>();
+            builder.Services.AddTransient<IUsuarioHandler, UsuarioHandler>();
         }
     }
 }

@@ -18,7 +18,7 @@ namespace BlazorApp.Api.Handlers
                 Conteudo = request.Conteudo,
                 Resposta = request.Resposta,
                 Status = request.Status,
-                UsuarioId = request.UsuarioId,
+                CreatedBy = request.UsuarioId,
             };
 
             try
@@ -105,6 +105,7 @@ namespace BlazorApp.Api.Handlers
                 alternativa.Conteudo = request.Conteudo;
                 alternativa.Resposta = request.Resposta;
                 alternativa.Status = request.Status;
+                alternativa.UpdatedBy = request.UsuarioId;
 
                 context.Alternativas.Update(alternativa);
                 await context.SaveChangesAsync();

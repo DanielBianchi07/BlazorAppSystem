@@ -18,7 +18,7 @@ namespace BlazorApp.Api.Handlers
                 Assunto = request.Assunto,
                 CargaHoraria = request.CargaHoraria,
                 DataCriacao = request.DataCriacao,
-                UsuarioId = request.UsuarioId,
+                CreatedBy = request.UsuarioId,
             };
 
             try
@@ -110,7 +110,7 @@ namespace BlazorApp.Api.Handlers
                 conteudoProgramatico.CargaHoraria = request.CargaHoraria;
                 conteudoProgramatico.Status = request.Status;
                 conteudoProgramatico.DataAlteracao = request.DataAlteracao;
-                conteudoProgramatico.UsuarioId = request.UsuarioId;
+                conteudoProgramatico.UpdatedBy = request.UsuarioId;
 
                 context.ConteudosProgramatico.Update(conteudoProgramatico);
                 await context.SaveChangesAsync();

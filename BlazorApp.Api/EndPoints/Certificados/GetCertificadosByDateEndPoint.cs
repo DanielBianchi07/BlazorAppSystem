@@ -10,7 +10,7 @@ namespace BlazorApp.Api.EndPoints.Certificados
     public class GetCertificadosByDateEndPoint : IEndPoint
     {
         public static void Map(IEndpointRouteBuilder app)
-            => app.MapGet("/data/{dataInicial}/{dataFinal}", HandleAsync)
+            => app.MapGet("/data/{dataInicial}-{dataFinal}", HandleAsync)
                 .WithName("Certificado: Get By Date")
                 .WithOrder(6)
                 .Produces<PagedResponse<List<Certificado>?>>();

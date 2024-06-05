@@ -27,7 +27,5 @@ namespace BlazorApp.Shared.Requests.Cursos
         public EAtivoInativo Status { get; set; } = EAtivoInativo.Ativo;
         public DateTime? DataCriacao { get; set; } = DateTime.Now;
         public DateTime? DataAlteracao { get; set; } = DateTime.Now;
-        [Required(ErrorMessage = "Usuário Inválido")]
-        public string UsuarioId { get; set; }
     }
 }

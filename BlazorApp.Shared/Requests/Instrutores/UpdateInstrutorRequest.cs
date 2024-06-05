@@ -33,8 +33,5 @@ namespace BlazorApp.Shared.Requests.Instrutores
         [Required(ErrorMessage = "Status Inválido")]
         public EAtivoInativo Status { get; set; } = EAtivoInativo.Ativo;
         public DateTime DataAlteracao { get; set; } = DateTime.Now;
-
-        [Required(ErrorMessage = "Usuario Inválido")]
-        public string UsuarioId { get; set; }
     }
 }

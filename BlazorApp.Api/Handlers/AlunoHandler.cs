@@ -2,10 +2,8 @@
 using BlazorApp.Shared.Handlers;
 using BlazorApp.Shared.Models;
 using BlazorApp.Shared.Requests.Alunos;
-using BlazorApp.Shared.Requests.Empresas;
 using BlazorApp.Shared.Responses;
 using Microsoft.EntityFrameworkCore;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace BlazorApp.Api.Handlers
 {
@@ -21,7 +19,6 @@ namespace BlazorApp.Api.Handlers
 
             var aluno = new Aluno
             {
-                UsuarioId = request.UsuarioId,
                 Nome = request.Nome,
                 Cpf = request.Cpf,
                 Rg = request.Rg,
@@ -29,6 +26,7 @@ namespace BlazorApp.Api.Handlers
                 Telefone = request.Telefone,
                 Assinatura = request.Assinatura,
                 DataCriacao = request.DataCriacao,
+                CreatedBy = request.UsuarioId,
                 Empresas = new List<Empresa>()
             };
 
@@ -155,7 +153,6 @@ namespace BlazorApp.Api.Handlers
 
                 if (aluno == null)
                     return new Response<Aluno?>(null, 404, "Aluno não encontrado");
-                aluno.UsuarioId = request.UsuarioId;
                 aluno.Nome = request.Nome;
                 aluno.Cpf = request.Cpf;
                 aluno.Rg = request.Rg;
@@ -163,6 +160,7 @@ namespace BlazorApp.Api.Handlers
                 aluno.Telefone = request.Telefone;
                 aluno.Assinatura = request.Assinatura;
                 aluno.DataAlteracao = request.DataAlteracao;
+                aluno.UpdatedBy = request.UsuarioId;
 
                 var empresa = await context.Empresas.FindAsync(request.EmpresaId);
                 if (empresa == null)

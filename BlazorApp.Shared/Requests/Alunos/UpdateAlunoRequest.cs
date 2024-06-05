@@ -23,7 +23,5 @@ namespace BlazorApp.Shared.Requests.Alunos
         public DateTime? DataAlteracao { get; set; } = DateTime.Now;
         [Required(ErrorMessage = "Empresa Inválida")]
         public Guid EmpresaId { get; set; }
-        [Required(ErrorMessage = "Usuário Inválido")]
-        public string UsuarioId { get; set; }
     }
 }

@@ -18,8 +18,5 @@ namespace BlazorApp.Shared.Requests.Questoes
         public EAtivoInativo Status { get; set; }
         [Required(ErrorMessage = "Prova Inválida")]
         public Guid ProvaId { get; set; }
-
-        [Required(ErrorMessage = "Usuario Inválido")]
-        public string UsuarioId { get; set; }
     }
 }

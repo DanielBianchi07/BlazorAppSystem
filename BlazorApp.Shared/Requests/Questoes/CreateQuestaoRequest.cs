@@ -16,8 +16,5 @@ namespace BlazorApp.Shared.Requests.Questoes
         public string Conteudo { get; set; } = string.Empty;
         [Required(ErrorMessage = "Status Inválido")]
         public EAtivoInativo Status { get; set; }
-
-        [Required(ErrorMessage = "Usuario Inválido")]
-        public string UsuarioId { get; set; }
     }
 }

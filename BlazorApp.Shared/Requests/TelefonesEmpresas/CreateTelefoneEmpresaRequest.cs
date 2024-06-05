@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BlazorApp.Shared.Enums;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BlazorApp.Shared.Requests.TelefonesEmpresas
 {
@@ -17,8 +13,5 @@ namespace BlazorApp.Shared.Requests.TelefonesEmpresas
 
         [Required(ErrorMessage = "Status Inválido")]
         public EAtivoInativo Status { get; set; }
-
-        [Required(ErrorMessage = "Usuario Inválido")]
-        public Guid UsuarioId { get; set; }
     }
 }

@@ -1,0 +1,24 @@
+﻿using BlazorApp.Api.Common.Api;
+using BlazorApp.Shared.Handlers;
+using BlazorApp.Shared.Models;
+using BlazorApp.Shared.Requests.TelefonesEmpresas;
+using BlazorApp.Shared.Responses;
+
+namespace BlazorApp.Api.EndPoints.TelefonesEmpresas
+{
+    public class GetTelefoneEmpresaByIdEndPoint : IEndPoint
+    {
+        public static void Map(IEndpointRouteBuilder app)
+            => app.MapGet("/{id}/{empresaId}", HandleAsync)
+                .WithName("TelefoneEmpresa: Get By Id")
+                .WithOrder(4)
+                .Produces<Response<TelefoneEmpresa?>>();
+        private static async Task<IResult> HandleAsync(ITelefoneEmpresaHandler handler, Guid id, Guid empresaId)
+        {
+            var request = new GetTelefoneEmpresaByIdRequest { Id = id, EmpresaId = empresaId };
+
+            var result = await handler.GetByIdAsync(request);
+            return result.IsSuccess ? TypedResults.Ok(result) : TypedResults.BadRequest(result);
+        }
+    }
+}

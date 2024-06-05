@@ -4,7 +4,6 @@ using BlazorApp.Shared.Models;
 using BlazorApp.Shared.Requests.Instrutores;
 using BlazorApp.Shared.Responses;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata.Ecma335;
 
 namespace BlazorApp.Api.Handlers
 {
@@ -23,7 +22,7 @@ namespace BlazorApp.Api.Handlers
                 Assinatura = request.Assinatura,
                 Status = request.Status,
                 DataCriacao = request.DataCriacao,
-                UsuarioId = request.UsuarioId
+                CreatedBy = request.UsuarioId
             };
 
             try
@@ -66,7 +65,7 @@ namespace BlazorApp.Api.Handlers
                 var query = context
                     .Instrutores
                     .AsNoTracking()
-                    .OrderBy(x => x.DataCriacao);
+                    .OrderBy(x => x.Especializacao);
 
                 var instrutor = await query
                     .Skip((request.PageNumber - 1) * request.PageSize)
@@ -165,7 +164,7 @@ namespace BlazorApp.Api.Handlers
                 instrutor.Assinatura = request.Assinatura;
                 instrutor.Status = request.Status;
                 instrutor.DataAlteracao = request.DataAlteracao;
-                instrutor.UsuarioId = request.UsuarioId;
+                instrutor.UpdatedBy = request.UsuarioId;
 
                 context.Instrutores.Update(instrutor);
                 await context.SaveChangesAsync();

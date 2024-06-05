@@ -11,6 +11,6 @@ namespace BlazorApp.Shared.Requests.Treinamentos
     public class GetTreinamentoBySituacaoRequest : PagedRequest
     {
         [Required(ErrorMessage = "Situação Inválido")]
-        public ESituacaoCertificado Situacao { get; set; }
+        public ESituacaoTreinamento Situacao { get; set; }
     }
 }

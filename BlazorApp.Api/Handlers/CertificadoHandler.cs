@@ -19,7 +19,7 @@ namespace BlazorApp.Api.Handlers
                 DataInicioCertificado = request.DataInicioCertificado,
                 DataCriacao = request.DataCriacao,
                 Situacao = request.Situacao,
-                UsuarioId = request.UsuarioId,
+                CreatedBy = request.UsuarioId,
             };
 
             try
@@ -129,7 +129,7 @@ namespace BlazorApp.Api.Handlers
                 certificado.DataInicioCertificado = request.DataInicioCertificado;
                 certificado.Situacao = request.Situacao;
                 certificado.DataAlteracao = request.DataAlteracao;
-                certificado.UsuarioId = request.UsuarioId;
+                certificado.UpdatedBy = request.UsuarioId;
 
                 context.Certificados.Update(certificado);
                 await context.SaveChangesAsync();

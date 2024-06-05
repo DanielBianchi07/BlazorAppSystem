@@ -10,7 +10,7 @@ namespace BlazorApp.Api.Data.Mappings
         {
             builder.ToTable("TelefoneEmpresa");
 
-            builder.HasKey(x => new {x.EmpresaId, x.NroTelefone});
+            builder.HasKey(x => x.Id);
 
             builder.Property(x => x.NroTelefone)
                 .IsRequired(true)

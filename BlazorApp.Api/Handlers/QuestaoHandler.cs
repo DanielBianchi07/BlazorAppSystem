@@ -19,7 +19,7 @@ namespace BlazorApp.Api.Handlers
 
             var questao = new Questao
             {
-                UsuarioId = request.UsuarioId,
+                CreatedBy = request.UsuarioId,
                 Conteudo = request.Conteudo,
                 Status = request.Status,
                 ProvaId = request.ProvaId
@@ -98,7 +98,7 @@ namespace BlazorApp.Api.Handlers
 
                 if (questao == null)
                     return new Response<Questao?>(null, 404, "Questao não encontrada para atualizar.");
-                questao.UsuarioId = request.UsuarioId;
+                questao.UpdatedBy = request.UsuarioId;
                 questao.Conteudo = request.Conteudo;
                 questao.Status = request.Status;
 

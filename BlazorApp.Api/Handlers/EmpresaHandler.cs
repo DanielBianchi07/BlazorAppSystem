@@ -13,7 +13,7 @@ namespace BlazorApp.Api.Handlers
         {
             var empresa = new Empresa
             {
-                UsuarioId = request.UsuarioId,
+                CreatedBy = request.UsuarioId,
                 CNPJ = request.CNPJ,
                 RazaoSocial = request.RazaoSocial,
                 Email = request.Email,
@@ -28,11 +28,11 @@ namespace BlazorApp.Api.Handlers
                 await context.Empresas.AddAsync(empresa);
                 await context.SaveChangesAsync();
 
-                return new Response<Empresa?>(empresa, 201, "Empresa cadastrado com sucesso!");
+                return new Response<Empresa?>(empresa, 201, "Empresa cadastrada com sucesso!");
             }
             catch
             {
-                return new Response<Empresa?>(null, 500, "Não foi possível cadastrar o empresa");
+                return new Response<Empresa?>(null, 500, "Não foi possível cadastrar a empresa");
             }
         }
 
@@ -43,16 +43,16 @@ namespace BlazorApp.Api.Handlers
                 var empresa = await context.Empresas.FirstOrDefaultAsync(x => x.Id == request.Id);
 
                 if (empresa == null)
-                    return new Response<Empresa?>(null, 404, "Empresa não encontrado");
+                    return new Response<Empresa?>(null, 404, "Empresa não encontrada");
                 empresa.Status = Shared.Enums.EAtivoInativo.Inativo;
                 context.Empresas.Update(empresa);
                 await context.SaveChangesAsync();
 
-                return new Response<Empresa?>(empresa, message: "Empresa inativado com sucesso!");
+                return new Response<Empresa?>(empresa, message: "Empresa inativada com sucesso!");
             }
             catch
             {
-                return new Response<Empresa?>(null, 500, "Não foi possível inativar o empresa");
+                return new Response<Empresa?>(null, 500, "Não foi possível inativar a empresa");
             }
         }
 
@@ -75,7 +75,7 @@ namespace BlazorApp.Api.Handlers
             }
             catch
             {
-                return new PagedResponse<List<Empresa>?>(null, 500, "Não foi possível encontrar o empresa");
+                return new PagedResponse<List<Empresa>?>(null, 500, "Não foi possível encontrar a empresa");
             }
         }
 
@@ -89,12 +89,12 @@ namespace BlazorApp.Api.Handlers
                     .FirstOrDefaultAsync(x => x.Id == request.Id);
 
                 return empresa is null
-                    ? new Response<Empresa?>(null, 404, "Empresa não encontrado")
+                    ? new Response<Empresa?>(null, 404, "Empresa não encontrada")
                     : new Response<Empresa?>(empresa);
             }
             catch
             {
-                return new Response<Empresa?>(null, 500, "Não foi possível encontrar o empresa");
+                return new Response<Empresa?>(null, 500, "Não foi possível encontrar a empresa");
             }
         }
 
@@ -105,18 +105,18 @@ namespace BlazorApp.Api.Handlers
                 var empresa = await context.Empresas.FirstOrDefaultAsync(x => x.Id == request.Id);
 
                 if (empresa == null)
-                    return new Response<Empresa?>(null, 404, "Empresa não encontrado para atualizar");
+                    return new Response<Empresa?>(null, 404, "Empresa não encontrada para atualizar");
                 empresa.CNPJ = request.CNPJ;
                 empresa.RazaoSocial = request.RazaoSocial;
                 empresa.Email = request.Email;
                 empresa.Status = request.Status;
                 empresa.DataAlteracao = request.DataAlteracao;
-                empresa.UsuarioId = request.UsuarioId;
+                empresa.UpdatedBy = request.UsuarioId;
 
                 context.Empresas.Update(empresa);
                 await context.SaveChangesAsync();
 
-                return new Response<Empresa?>(empresa, message: "Empresa atualizado com sucesso!");
+                return new Response<Empresa?>(empresa, message: "Empresa atualizada com sucesso!");
             }
             catch
             {

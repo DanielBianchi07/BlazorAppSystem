@@ -15,7 +15,6 @@ public class Prova
     [JsonIgnore]
     public ICollection<Questao> Questoes { get; set; }
 
-    public string UsuarioId { get; set; }
-    [JsonIgnore]
-    public ICollection<Usuario> Usuarios { get; set; }
+    public Guid CreatedBy { get; set; }
+    public Guid? UpdatedBy { get; set; }
 }
