@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using BlazorApp.Web;
 using MudBlazor.Services;
+using BlazorApp.Shared;
+using BlazorApp.Shared.Handlers;
+using BlazorApp.Web.Handlers;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -9,6 +12,12 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddMudServices();
 
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+builder.Services.AddHttpClient(
+    WebConfiguration.HttpClientName,
+    opt => { opt.BaseAddress = new Uri(Configuration.BackendUrl);
+    });
+
+builder.Services.AddTransient<IEmpresaHandler, EmpresaHandler>();
+builder.Services.AddTransient<IEnderecoEmpresaHandler, EnderecoEmpresaHandler>();
 
 await builder.Build().RunAsync();

@@ -300,7 +300,7 @@ namespace BlazorApp.Api.Migrations
 
             modelBuilder.Entity("BlazorApp.Shared.Models.EnderecoEmpresa", b =>
                 {
-                    b.Property<Guid>("EmpresaId")
+                    b.Property<Guid?>("EmpresaId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Bairro")

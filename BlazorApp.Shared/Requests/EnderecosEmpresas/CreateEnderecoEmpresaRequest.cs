@@ -11,7 +11,7 @@ namespace BlazorApp.Shared.Requests.EnderecosEmpresas
     public class CreateEnderecoEmpresaRequest : Request
     {
         [Required(ErrorMessage = "Empresa Inválida")]
-        public Guid EmpresaId { get; set; }
+        public Guid? EmpresaId { get; set; }
 
         [Required(ErrorMessage = "CEP Inválido")]
         public string CEP { get; set; } = string.Empty;

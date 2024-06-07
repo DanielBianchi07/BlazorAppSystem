@@ -13,6 +13,7 @@
     <Compile Remove="Requests\Alunos\GetAlunoByTreinamento.cs" />
     <Compile Remove="Requests\Alunos\GetAlunoByTreinamentoRequest.cs" />
     <Compile Remove="Requests\Alunos\GetAlunosByIdRequest.cs" />
+	<PackageReference Include="Microsoft.AspNetCore.Components.DataAnnotations.Validation" Version="3.2.0-rc1.20223.4" />
   </ItemGroup>
 
   <ItemGroup>

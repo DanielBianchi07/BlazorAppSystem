@@ -1,9 +1,7 @@
 using BlazorApp.Api;
 using BlazorApp.Api.Common.Api;
-using BlazorApp.Api.Data;
 using BlazorApp.Api.EndPoints;
-using BlazorApp.Api.Handlers;
-using BlazorApp.Shared.Handlers;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddConfiguration();

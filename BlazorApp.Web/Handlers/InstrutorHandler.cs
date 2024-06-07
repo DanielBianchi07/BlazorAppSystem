@@ -1,41 +1,41 @@
-﻿using BlazorApp.Api.Data;
-using BlazorApp.Shared.Handlers;
-using BlazorApp.Shared.Models;
-using BlazorApp.Shared.Requests.Instrutores;
-using BlazorApp.Shared.Responses;
+﻿//using BlazorApp.Shared.Handlers;
+//using BlazorApp.Shared.Models;
+//using BlazorApp.Shared.Requests.Instrutores;
+//using BlazorApp.Shared.Responses;
+//using System.Net.Http.Json;
 
-namespace BlazorApp.Api.Handlers
-{
-    public class InstrutorHandler(AppDbContext context) : IInstrutorHandler
-    {
-        public Task<Response<Instrutor?>> CreateAsync(CreateInstrutorRequest request)
-        {
-            throw new NotImplementedException();
-        }
+//namespace BlazorApp.Web.Handlers
+//{
+//    public class AlternativaHandler(IHttpClientFactory httpClientFactory) : IAlternativaHandler
+//    {
+//        private readonly HttpClient _httpClient = httpClientFactory.CreateClient(WebConfiguration.HttpClientName);
+//        public async Task<Response<Alternativa?>> CreateAsync(CreateAlternativaRequest request)
+//        {
+//            var result = await _httpClient.PostAsJsonAsync("v1/alternativas", request);
+//            return await result.Content.ReadFromJsonAsync<Response<Alternativa?>>()
+//                ?? new Response<Alternativa?>(null, 400, "Falha ao criar alternativa");
+//        }
 
-        public Task<Response<Instrutor?>> DeleteAsync(DeleteInstrutorRequest request)
-        {
-            throw new NotImplementedException();
-        }
+//        public async Task<Response<Alternativa?>> DeleteAsync(DeleteAlternativaRequest request)
+//        {
+//            var result = await _httpClient.DeleteAsync($"v1/alternativas/{request.Id}");
+//            return await result.Content.ReadFromJsonAsync<Response<Alternativa?>>()
+//                ?? new Response<Alternativa?>(null, 400, "Falha ao inativar alternativa");
+//        }
 
-        public Task<PagedResponse<List<Instrutor>?>> GetAllAsync(GetAllInstrutorRequest request)
-        {
-            throw new NotImplementedException();
-        }
+//        public async Task<Response<Alternativa?>> GetByIdAsync(GetAlternativaByIdRequest request)
+//            => await _httpClient.GetFromJsonAsync<Response<Alternativa?>>($"v1/alternativas/{request.Id}")
+//                ?? new Response<Alternativa?>(null, 400, "Falha ao buscar a alternativa");
 
-        public Task<PagedResponse<List<Instrutor>?>> GetByEspecializacaoAsync(GetInstrutorByEspecializacaoRequest request)
-        {
-            throw new NotImplementedException();
-        }
+//        public async Task<PagedResponse<List<Alternativa>?>> GetByQuestaoAsync(GetAlternativasByQuestaoRequest request)
+//            => await _httpClient.GetFromJsonAsync<PagedResponse<List<Alternativa>?>>($"v1/alternativas/questao/{request.QuestaoId}")
+//                ?? new PagedResponse<List<Alternativa>?>(null, 400, "Falha ao buscar alternativas");
 
-        public Task<Response<Instrutor?>> GetByIdAsync(GetInstrutorByIdRequest request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Response<Instrutor?>> UpdateAsync(UpdateInstrutorRequest request)
-        {
-            throw new NotImplementedException();
-        }
-    }
-}
+//        public async Task<Response<Alternativa?>> UpdateAsync(UpdateAlternativaRequest request)
+//        {
+//            var result = await _httpClient.PutAsJsonAsync($"v1/alternativas/{request.Id}", request);
+//            return await result.Content.ReadFromJsonAsync<Response<Alternativa?>>()
+//                ?? new Response<Alternativa?>(null, 400, "Falha ao atualizar empresa");
+//        }
+//    }
+//}

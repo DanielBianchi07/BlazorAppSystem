@@ -1,120 +1,41 @@
-﻿using BlazorApp.Api.Data;
-using BlazorApp.Shared.Handlers;
+﻿using BlazorApp.Shared.Handlers;
 using BlazorApp.Shared.Models;
 using BlazorApp.Shared.Requests.Alternativas;
 using BlazorApp.Shared.Responses;
-using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata.Ecma335;
+using System.Net.Http.Json;
 
-namespace BlazorApp.Api.Handlers
+namespace BlazorApp.Web.Handlers
 {
-    public class AlternativaHandler(AppDbContext context) : IAlternativaHandler
+    public class AlternativaHandler(IHttpClientFactory httpClientFactory) : IAlternativaHandler
     {
+        private readonly HttpClient _httpClient = httpClientFactory.CreateClient(WebConfiguration.HttpClientName);
         public async Task<Response<Alternativa?>> CreateAsync(CreateAlternativaRequest request)
         {
-            var alterantiva = new Alternativa
-            {
-                UsuarioId = request.UsuarioId,
-                Conteudo = request.Conteudo,
-                Resposta = request.Resposta,
-                Status = request.Status,
-                QuestaoId = request.QuestaoId
-            };
-
-            try
-            {
-                await context.Alternativas.AddAsync(alterantiva);
-                await context.SaveChangesAsync();
-
-                return new Response<Alternativa?>(alterantiva, 201, "Alternativa cadastrada com sucesso!");
-            }
-            catch
-            {
-                return new Response<Alternativa?>(null, 500, "Não foi possível cadastrar a alternativa");
-            }
+            var result = await _httpClient.PostAsJsonAsync("v1/alternativas", request);
+            return await result.Content.ReadFromJsonAsync<Response<Alternativa?>>()
+                ?? new Response<Alternativa?>(null, 400, "Falha ao criar alternativa");
         }
 
         public async Task<Response<Alternativa?>> DeleteAsync(DeleteAlternativaRequest request)
         {
-            try
-            {
-                var alternativa = await context.Alternativas.FirstOrDefaultAsync(x => x.Id == request.Id);
-
-                if (alternativa == null)
-                    return new Response<Alternativa?>(null, 404, "Alternativa não encontrada");
-
-                context.Alternativas.Remove(alternativa);
-                await context.SaveChangesAsync();
-
-                return new Response<Alternativa?>(alternativa, message: "Alternativa removida com sucesso!");
-            }
-            catch
-            {
-                return new Response<Alternativa?>(null, 500, "Não foi possível remover a alternativa");
-            }
-        }
-
-        public async Task<PagedResponse<List<Alternativa>?>> GetByQuestaoAsync(GetAlternativasByQuestaoRequest request)
-        {
-            try
-            {
-                var query = context.Alternativas.AsNoTracking().Where(x => x.QuestaoId == request.QuestaoId).OrderBy(x => x.Questao);
-
-                var alternativaQuestao = await query
-                    .Skip((request.PageNumber - 1) * request.PageSize)
-                    .Take(request.PageSize)
-                    .ToListAsync();
-
-                var count = await query.CountAsync();
-
-                return new PagedResponse<List<Alternativa>?>(alternativaQuestao, count, request.PageNumber, request.PageSize);
-            }
-            catch
-            {
-                return new PagedResponse<List<Alternativa>?>(null, 500, "Não foi possível encontrar alternativas");
-            }
+            var result = await _httpClient.DeleteAsync($"v1/alternativas/{request.Id}");
+            return await result.Content.ReadFromJsonAsync<Response<Alternativa?>>()
+                ?? new Response<Alternativa?>(null, 400, "Falha ao inativar alternativa");
         }
 
         public async Task<Response<Alternativa?>> GetByIdAsync(GetAlternativaByIdRequest request)
-        {
-            try
-            {
-                var alternativa = await context
-                    .Alternativas
-                    .AsNoTracking()
-                    .FirstOrDefaultAsync(x => x.Id == request.Id);
+            => await _httpClient.GetFromJsonAsync<Response<Alternativa?>>($"v1/alternativas/{request.Id}")
+                ?? new Response<Alternativa?>(null, 400, "Falha ao buscar a alternativa");
 
-                return alternativa is null
-                    ? new Response<Alternativa?>(null, 404, "Alternativa não encontrada")
-                    : new Response<Alternativa?>(alternativa);
-            }
-            catch
-            {
-                return new Response<Alternativa?>(null, 500, "Não foi possível encontrar a alternativa");
-            }
-        }
+        public async Task<PagedResponse<List<Alternativa>?>> GetByQuestaoAsync(GetAlternativasByQuestaoRequest request)
+            => await _httpClient.GetFromJsonAsync<PagedResponse<List<Alternativa>?>>($"v1/alternativas/questao/{request.QuestaoId}")
+                ?? new PagedResponse<List<Alternativa>?>(null, 400, "Falha ao buscar alternativas");
 
         public async Task<Response<Alternativa?>> UpdateAsync(UpdateAlternativaRequest request)
         {
-            try
-            {
-                var alternativa = await context.Alternativas.FirstOrDefaultAsync(x => x.Id == request.Id);
-
-                if (alternativa == null)
-                    return new Response<Alternativa?>(null, 404, "Alternativa não encontrada");
-                alternativa.Conteudo = request.Conteudo;
-                alternativa.Resposta = request.Resposta;
-                alternativa.Status = request.Status;
-
-                context.Alternativas.Update(alternativa);
-                await context.SaveChangesAsync();
-
-                return new Response<Alternativa?>(alternativa, message: "Alternativa atualizada com sucesso!");
-            }
-            catch
-            {
-                return new Response<Alternativa?>(null, 500, "Não foi possível atualizar a alternativa");
-            }
+            var result = await _httpClient.PutAsJsonAsync($"v1/alternativas/{request.Id}", request);
+            return await result.Content.ReadFromJsonAsync<Response<Alternativa?>>()
+                ?? new Response<Alternativa?>(null, 400, "Falha ao atualizar alternativa");
         }
     }
 }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlazorApp.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240605204023_v1")]
+    [Migration("20240607013848_v1")]
     partial class v1
     {
         /// <inheritdoc />
@@ -303,7 +303,7 @@ namespace BlazorApp.Api.Migrations
 
             modelBuilder.Entity("BlazorApp.Shared.Models.EnderecoEmpresa", b =>
                 {
-                    b.Property<Guid>("EmpresaId")
+                    b.Property<Guid?>("EmpresaId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Bairro")

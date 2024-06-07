@@ -1,16 +1,16 @@
 ﻿@inherits LayoutComponentBase
 
-<MudThemeProvider IsDarkMode="true" />
+<MudThemeProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
 
 <MudLayout>
     <MudAppBar>
-        BlazorApp
+        <h3>BlazorAppSystem</h3>
     </MudAppBar>
     <MudMainContent>
         <MudContainer>
-            @Body
+                @Body
         </MudContainer>
     </MudMainContent>
 </MudLayout>

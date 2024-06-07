@@ -14,14 +14,13 @@ namespace BlazorApp.Shared.Requests.Empresas
     {
         [Required(ErrorMessage = "CNPJ Inválido")]
         public string CNPJ { get; set; } = string.Empty;
-
         [Required(ErrorMessage = "Razão Social Inválida")]
         public string RazaoSocial { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         [Required(ErrorMessage = "Status Inválido")]
         public EAtivoInativo Status { get; set; } = EAtivoInativo.Ativo;
         public DateTime? DataCriacao { get; set; } = DateTime.Now;
-        [Required(ErrorMessage = "Endereco Inválido")]
-        public EnderecoEmpresa Endereco { get; set; }
+        [ValidateComplexType]
+        public EnderecoEmpresa Endereco { get; set; } = null!;
     }
 }
