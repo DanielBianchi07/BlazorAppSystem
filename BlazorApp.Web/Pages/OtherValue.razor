@@ -1,0 +1,19 @@
+﻿@inherits LayoutComponentBase
+
+<MainLayout User="@User">
+    <Value>
+        <MudContainer MaxWidth="MaxWidth.Medium">
+            <MudPaper Class="pa-8 mt-4" Outlined="true">
+                @ChildContent
+            </MudPaper>
+        </MudContainer>
+    </Value>
+</MainLayout>
+
+@code
+{
+    [Parameter]
+    public string? User { get; set; } = null;
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+}

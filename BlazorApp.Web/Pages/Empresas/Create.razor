@@ -5,7 +5,7 @@
     <MudText Typo="Typo.h4" Class="mt-10 mb-6">Nova Empresa</MudText>
 
     <EditForm Model="@InputModel" Context="EmpresaForm" OnValidSubmit="OnValidSubmitAsync">
-        <MudPaper Class="pa-8 mt-4" Outlined="true">
+        <MudPaper Class="pa-8" Outlined="true">
             <ObjectGraphDataAnnotationsValidator />
             <DataAnnotationsValidator />
             <MudTextField Label="Razão Social"
@@ -14,6 +14,7 @@
                           For="@(() => InputModel.RazaoSocial)" />
 
             <MudTextField Label="CNPJ"
+                Mask="@(new PatternMask("00.000.000/0000-00"))"
                           HelperText="Campo obrigatório"
                           @bind-Value="InputModel.CNPJ"
                           For="@(() => InputModel.CNPJ)" />
@@ -23,7 +24,47 @@
                           @bind-Value="InputModel.Email"
                           For="@(() => InputModel.Email)" />
 
+                <div class="d-fles justify-start">
+                    <MudTextField Label="Telefones"
+                              Mask="@(new PatternMask("(00) 00000-0000"))"
+                              HelperText="Digite um telefone para contato"
+                              @bind-Value="Telefone" />
+                </div>
+                <div class="d-flex justify-start">
+                    <div>
+                        <MudButton @onclick="AddTelefone" 
+                                   Variant="Variant.Filled"
+                                   Color="Color.Secondary"
+                                   Class="mt-8 mb-10"
+                                   Size="Size.Small" >
+                            Adicionar
+                        </MudButton>
+                    </div>
+                    <MudContainer>
+                        <div class="d-flex justify-end">
+                            @if(InputModel.Telefones.Count == 0)
+                            {
+                                <p></p>
+                            }
+                            else
+                            {
+                                <h3>Telefones</h3>
+                                @foreach(var tel in InputModel.Telefones)
+                                {
+                                    <MudText Typo="Typo.h4">@tel.NroTelefone</MudText>
+                                }
+                            }
+                        </div>
+                    </MudContainer>
+                </div>
+
+        </MudPaper>
+
+        <MudText Typo="Typo.h5" Class="mt-10 mb-6">Endereço</MudText>
+        <MudPaper Class="pa-8 mt-4" Outlined="true">
+
             <MudTextField Label="CEP"
+                          Mask="@(new PatternMask("00000-000"))"
                           HelperText="Campo obrigatório"
                           @bind-Value="InputModel.Endereco.CEP"
                           For="@(() => InputModel.Endereco.CEP)" />
@@ -79,6 +120,7 @@
                 }
             </MudSelect>
         </MudPaper>
+
         <MudButton ButtonType="ButtonType.Submit"
                    Variant="Variant.Filled"
                    Color="Color.Primary"
@@ -87,3 +129,4 @@
         </MudButton>
     </EditForm>
 </MudContainer>
+-->

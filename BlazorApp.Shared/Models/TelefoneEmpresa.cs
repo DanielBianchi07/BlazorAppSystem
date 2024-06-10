@@ -5,12 +5,12 @@ namespace BlazorApp.Shared.Models;
 
 public class TelefoneEmpresa
 {
-    public Guid Id { get; set; } = Guid.NewGuid();
+    public Guid Id { get; set; }
     public Guid EmpresaId { get; set; }
     public string NroTelefone { get; set; } = string.Empty;
     public EAtivoInativo Status { get; set; } = EAtivoInativo.Ativo;
     [JsonIgnore]
-    public Empresa Empresa { get; set; }
+    public Empresa Empresa { get; set; } = null!;
 
     public Guid CreatedBy { get; set; }
     public Guid? UpdatedBy { get; set; }

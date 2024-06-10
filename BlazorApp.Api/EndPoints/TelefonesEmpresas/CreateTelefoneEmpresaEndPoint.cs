@@ -18,7 +18,7 @@ namespace BlazorApp.Api.EndPoints.TelefonesEmpresas
         private static async Task<IResult> HandleAsync(ITelefoneEmpresaHandler handler, CreateTelefoneEmpresaRequest request)
         {
             var response = await handler.CreateAsync(request);
-            return response.IsSuccess ? TypedResults.Created($"v1/telefones-empresas/{response.Dados?.EmpresaId}", response) : TypedResults.BadRequest(response);
+            return response.IsSuccess ? TypedResults.Created($"v1/telefones-empresas/{response.Dados?.Id}", response) : TypedResults.BadRequest(response);
         }
     }
 }

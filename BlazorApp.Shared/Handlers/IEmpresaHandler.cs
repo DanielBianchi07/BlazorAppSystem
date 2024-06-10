@@ -9,6 +9,7 @@ namespace BlazorApp.Shared.Handlers
         Task<Response<Empresa?>> CreateAsync(CreateEmpresaRequest request);
         Task<Response<Empresa?>> DeleteAsync(DeleteEmpresaRequest request);
         Task<PagedResponse<List<Empresa>?>> GetAllAsync(GetAllEmpresasRequest request);
+        Task<PagedResponse<List<Empresa>?>> GetByRazaoSocial(GetEmpresaByRazaoSocialRequest request);
         Task<Response<Empresa?>> GetByIdAsync(GetEmpresaByIdRequest request);
         Task<Response<Empresa?>> UpdateAsync(UpdateEmpresaRequest request);
     }

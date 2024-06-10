@@ -4,7 +4,6 @@ using BlazorApp.Shared.Models;
 using BlazorApp.Shared.Requests.TelefonesEmpresas;
 using BlazorApp.Shared.Requests.Empresas;
 using BlazorApp.Shared.Responses;
-using BlazorApp.Shared.Requests.ConteudosProgramaticos;
 
 namespace BlazorApp.Api.EndPoints.TelefonesEmpresas
 {

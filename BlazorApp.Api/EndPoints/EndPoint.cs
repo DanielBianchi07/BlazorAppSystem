@@ -74,6 +74,7 @@ namespace BlazorApp.Api.EndPoints
                 .MapEndPoint<DeleteEmpresaEndPoint>()
                 .MapEndPoint<GetAllEmpresaEndPoint>()
                 .MapEndPoint<GetEmpresaByIdEndPoint>()
+                .MapEndPoint<GetEmpresaByRazaoSocialEndPoint>()
                 .MapEndPoint<UpdateEmpresaEndPoint>();
 
             endpoints.MapGroup("v1/enderecos-empresas")

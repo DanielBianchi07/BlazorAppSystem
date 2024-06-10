@@ -22,5 +22,8 @@ namespace BlazorApp.Shared.Requests.Empresas
         public DateTime? DataCriacao { get; set; } = DateTime.Now;
         [ValidateComplexType]
         public EnderecoEmpresa Endereco { get; set; } = null!;
+
+        [ValidateComplexType]
+        public List<TelefoneEmpresa> Telefones { get; set; } = new();
     }
 }

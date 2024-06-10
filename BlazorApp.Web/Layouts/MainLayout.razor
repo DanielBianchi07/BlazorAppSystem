@@ -5,7 +5,7 @@
 <MudSnackbarProvider />
 
 <MudLayout>
-    <MudAppBar>
+    <MudAppBar Color="Color.Dark">
         <h3>BlazorAppSystem</h3>
     </MudAppBar>
     <MudMainContent>
@@ -14,3 +14,11 @@
         </MudContainer>
     </MudMainContent>
 </MudLayout>
+
+@code
+{
+    [Parameter]
+    public string? User { get; set; } = null;
+    [Parameter]
+    public RenderFragment? Value { get; set; }
+}

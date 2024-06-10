@@ -32,6 +32,10 @@ namespace BlazorApp.Web.Handlers
             => await _httpClient.GetFromJsonAsync<Response<Empresa?>>($"v1/empresas/{request.Id}")
                 ?? new Response<Empresa?>(null, 400, "Falha ao buscar a empresa");
 
+        public async Task<PagedResponse<List<Empresa>?>> GetByRazaoSocial(GetEmpresaByRazaoSocialRequest request)
+            => await _httpClient.GetFromJsonAsync<PagedResponse<List<Empresa>?>>($"v1/razaoSocial/{request.RazaoSocial}")
+                ?? new PagedResponse<List<Empresa>?>(null, 400, "Falha ao buscar a empresa");
+
         public async Task<Response<Empresa?>> UpdateAsync(UpdateEmpresaRequest request)
         {
             var result = await _httpClient.PutAsJsonAsync($"v1/empresas/{request.Id}", request);

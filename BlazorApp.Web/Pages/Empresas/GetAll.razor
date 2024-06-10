@@ -1,3 +1,53 @@
 ﻿@page "/empresas"
+@using BlazorApp.Shared.Models
 @inherits GetAllEmpresasPage
 
+<MudContainer MaxWidth="MaxWidth.ExtraLarge">
+    <MudText Typo="Typo.h4" Class="mt-10 mb-6">Empresas</MudText>
+    <div class="d-flex justify-end">
+        <MudButton Variant="Variant.Filled" Color="Color.Dark" StartIcon="@Icons.TwoTone.Add" Href="/empresas/cadastrar">
+            Nova Empresa    
+        </MudButton>
+    </div>
+
+    <MudDataGrid T="Empresa" 
+        ReadOnly="@_readOnly" 
+        EditMode="@(_isCellEditMode ? DataGridEditMode.Cell : DataGridEditMode.Form)" 
+        StartedEditingItem="@StartEditItem" CommittedItemChanges="@CommitedEditItem" 
+        CanceledEditingItem="@CanceledEditItem" 
+        EditTrigger="@(_editTriggerRowClick ? DataGridEditTrigger.OnRowClick : DataGridEditTrigger.Manual)" 
+        Class="mt-1 mb-15" 
+        Items="@Empresas" 
+        Filterable="true" 
+        QuickFilter="@_quickFilter">
+        <Columns>
+            <PropertyColumn Property="x=>x.CNPJ" Title="CNPJ" />
+            <PropertyColumn Property="x=>x.RazaoSocial" Title="Razão Social" />
+            <PropertyColumn Property="x=>x.Email" Title="Email" />
+            <PropertyColumn Property="x=>x.TelefonesEmpresa" Title="Telefones" />
+            <PropertyColumn Property="x=>x.DataCriacao" Title="Data de Criação" />
+            <TemplateColumn Hidden="@(_isCellEditMode || _readOnly || _editTriggerRowClick)" Class="d-flex justify-end">
+                <CellTemplate>
+                    <MudIconButton 
+                        Size="@Size.Small"
+                        Icon="@Icons.Material.Filled.Edit" 
+                        Color="Color.Info" 
+                        OnClick="@context.Actions.StartEditingItemAsync" />
+                </CellTemplate>
+            </TemplateColumn>
+            <TemplateColumn Class="d-flex justify-end">
+                <CellTemplate>
+                        <MudIconButton 
+                            Size="@Size.Small"
+                            Icon="@Icons.Material.Filled.Delete" 
+                            Color="Color.Error" 
+                            OnClick="() => OnDeleteButtonActive(context.Item.Id, context.Item.RazaoSocial)" />
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+        <PagerContent>
+            <MudDataGridPager T="@Empresa" />
+        </PagerContent>
+    </MudDataGrid>
+
+</MudContainer>

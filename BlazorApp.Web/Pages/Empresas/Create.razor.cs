@@ -3,6 +3,7 @@ using BlazorApp.Shared.Handlers;
 using BlazorApp.Shared.Models;
 using BlazorApp.Shared.Requests.Empresas;
 using BlazorApp.Shared.Requests.EnderecosEmpresas;
+using BlazorApp.Shared.Requests.TelefonesEmpresas;
 using BlazorApp.Shared.Responses;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
@@ -15,6 +16,8 @@ namespace BlazorApp.Web.Pages.Empresas
 
         public bool IsBusy { get; set; } = false;
         public CreateEmpresaRequest InputModel { get; set; } = new();
+        public CreateTelefoneEmpresaRequest InputModelTelefone { get; set; } = new();
+        public string Telefone { get; set; } = string.Empty;
 
         public Dictionary<string, List<string>> EstadosCidades = ConstantStatesAndCities.dicionario;
         #endregion
@@ -22,6 +25,8 @@ namespace BlazorApp.Web.Pages.Empresas
         #region Services
         [Inject]
         public IEmpresaHandler Handler { get; set; } = null!;
+        [Inject]
+        public ITelefoneEmpresaHandler TelefoneHandler { get; set; } = null!;
         [Inject]
         public NavigationManager NavigationManager { get; set; } = null!;
         [Inject]
@@ -41,6 +46,16 @@ namespace BlazorApp.Web.Pages.Empresas
 
                 if (result.IsSuccess)
                 {
+                    foreach(var tel in InputModel.Telefones)
+                    {
+                        tel.EmpresaId = result.Dados.Id;
+                        InputModelTelefone.NroTelefone = tel.NroTelefone;
+                        InputModelTelefone.EmpresaId = tel.EmpresaId;
+                        InputModelTelefone.Status = tel.Status;
+
+                        TelefoneHandler.CreateAsync(InputModelTelefone);
+                    }
+
                     Snackbar.Add(result.Message, Severity.Success);
                     NavigationManager.NavigateTo("/empresas");
                 }
@@ -59,9 +74,33 @@ namespace BlazorApp.Web.Pages.Empresas
             }
         }
 
+        public void AddTelefone()
+        {
+            if(!string.IsNullOrEmpty(Telefone))
+            {
+                var tel = new TelefoneEmpresa { NroTelefone = Telefone, Status = Shared.Enums.EAtivoInativo.Ativo };
+                if(InputModel.Telefones.Count == 0)
+                {
+                    InputModel.Telefones.Add(tel);
+                }
+                else
+                {
+                    foreach (var tele in InputModel.Telefones)
+                    {
+                        if (tele.NroTelefone != Telefone)
+                        {
+                            InputModel.Telefones.Add(tel);
+                        }
+                    }
+                }
+            }
+
+        }
+
         protected override void OnInitialized()
         {
             InputModel.Endereco = new();
+            InputModel.Telefones = new();
         }
         #endregion
     }

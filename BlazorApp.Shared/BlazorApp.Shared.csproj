@@ -13,6 +13,7 @@
     <Compile Remove="Requests\Alunos\GetAlunoByTreinamento.cs" />
     <Compile Remove="Requests\Alunos\GetAlunoByTreinamentoRequest.cs" />
     <Compile Remove="Requests\Alunos\GetAlunosByIdRequest.cs" />
+    <Compile Remove="Requests\Empresas\GetEmpresaByNomeRequest.cs" />
 	<PackageReference Include="Microsoft.AspNetCore.Components.DataAnnotations.Validation" Version="3.2.0-rc1.20223.4" />
   </ItemGroup>
 
@@ -20,6 +21,7 @@
     <None Remove="Handlers\NewFile1.txt" />
     <None Remove="Requests\Alunos\NewFile1.txt" />
     <None Remove="Requests\ConteudosProgramaticos\NewFile1.txt" />
+    <None Remove="Requests\Empresas\NewFile1.txt" />
     <None Remove="Requests\Instrutores\DeleteInstrutorRequest.cd" />
     <None Remove="Requests\Instrutores\NewFile1.txt" />
     <None Remove="Requests\ListasPresencas\NewFile1.txt" />

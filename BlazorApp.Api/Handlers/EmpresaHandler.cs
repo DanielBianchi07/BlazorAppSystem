@@ -98,6 +98,29 @@ namespace BlazorApp.Api.Handlers
             }
         }
 
+        public async Task<PagedResponse<List<Empresa>?>> GetByRazaoSocial(GetEmpresaByRazaoSocialRequest request)
+        {
+            try
+            {
+                var query = context
+                .Empresas
+                .AsNoTracking()
+                .Where(x => x.RazaoSocial == request.RazaoSocial);
+
+                var empresas = await query
+                    .Skip((request.PageNumber - 1) * request.PageSize)
+                    .Take(request.PageSize)
+                    .ToListAsync();
+
+                var count = await query.CountAsync();
+                return new PagedResponse<List<Empresa>?>(empresas, count, request.PageNumber, request.PageSize);
+            }
+            catch
+            {
+                return new PagedResponse<List<Empresa>?>(null, 500, "Não foi possível encontrar as empresas");
+            }
+        }
+
         public async Task<Response<Empresa?>> UpdateAsync(UpdateEmpresaRequest request)
         {
             try

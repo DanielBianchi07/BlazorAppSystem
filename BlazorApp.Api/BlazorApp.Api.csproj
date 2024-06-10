@@ -12,6 +12,8 @@
     <None Remove="EndPoints\ConteudosProgramaticos\NewFile.txt" />
     <None Remove="EndPoints\Cursos\NewFile.txt" />
     <None Remove="EndPoints\Cursos\NewFile1.txt" />
+    <None Remove="EndPoints\Empresas\GetEmpresaByRazaoSocialEnd" />
+    <None Remove="EndPoints\Empresas\NewFile.txt" />
     <None Remove="EndPoints\EnderecosEmpresas\NewFile.txt" />
     <None Remove="EndPoints\Instrutores\NewFile.txt" />
     <None Remove="EndPoints\Instrutores\NewFile1.txt" />

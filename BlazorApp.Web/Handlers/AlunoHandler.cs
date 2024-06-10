@@ -25,15 +25,15 @@ namespace BlazorApp.Web.Handlers
 
         public async Task<PagedResponse<List<Aluno>?>> GetAllAsync(GetAllAlunoRequest request)
             => await _httpClient.GetFromJsonAsync<PagedResponse<List<Aluno>?>>($"v1/alunos")
-                ?? new Response<PagedResponse<List<Aluno>?>>(null, 400, "Falha ao buscar o aluno");
-
+                ?? new PagedResponse<List<Aluno>?>(null, 400, "Falha ao buscar o aluno");
+        
         public async Task<PagedResponse<List<Aluno>?>> GetAlunoByEmpresaAsync(GetAlunoByEmpresaRequest request)
             => await _httpClient.GetFromJsonAsync<PagedResponse<List<Aluno>?>>($"v1/alunos/empresa/{request.EmpresaId}")
-                ?? new Response<PagedResponse<List<Aluno>?>>(null, 400, "Falha ao buscar os alunos de uma empresa.");
+                ?? new PagedResponse<List<Aluno>?>(null, 400, "Falha ao buscar os alunos de uma empresa.");
 
         public async Task<PagedResponse<List<Aluno>?>> GetAlunoByTreinamentoAsync(GetAlunoByTreinamentoRequest request)
             => await _httpClient.GetFromJsonAsync<PagedResponse<List<Aluno>?>>($"v1/alunos/treinamento/{request.TreinamentoId}")
-                ?? new Response<PagedResponse<List<Aluno>?>>(null, 400, "Falha ao buscar alunos do treinamento.");
+                ?? new PagedResponse<List<Aluno>?>(null, 400, "Falha ao buscar alunos do treinamento.");
 
         public async Task<Response<Aluno?>> GetByIdAsync(GetAlunoByIdRequest request)
             => await _httpClient.GetFromJsonAsync<Response<Aluno?>>($"v1/alunos/{request.Id}")
