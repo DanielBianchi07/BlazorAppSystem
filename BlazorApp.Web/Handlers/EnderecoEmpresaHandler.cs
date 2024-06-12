@@ -11,25 +11,25 @@ namespace BlazorApp.Web.Handlers
         private readonly HttpClient _httpClient = httpClientFactory.CreateClient(WebConfiguration.HttpClientName);
         public async Task<Response<EnderecoEmpresa?>> CreateAsync(CreateEnderecoEmpresaRequest request)
         {
-            var result = await _httpClient.PostAsJsonAsync("v1/endereco-empresa", request);
+            var result = await _httpClient.PostAsJsonAsync("v1/enderecos-empresas", request);
             return await result.Content.ReadFromJsonAsync<Response<EnderecoEmpresa?>>()
                 ?? new Response<EnderecoEmpresa?>(null, 400, "Falha ao criar endereço");
         }
 
         public async Task<Response<EnderecoEmpresa?>> DeleteAsync(DeleteEnderecoEmpresaRequest request)
         {
-            var result = await _httpClient.DeleteAsync($"v1/endereco-emrpesa/{request.EmpresaId}");
+            var result = await _httpClient.DeleteAsync($"v1/enderecos-empresas/{request.EmpresaId}");
             return await result.Content.ReadFromJsonAsync<Response<EnderecoEmpresa?>>()
                 ?? new Response<EnderecoEmpresa?>(null, 400, "Falha ao inativar endereço");
         }
 
         public async Task<Response<EnderecoEmpresa?>> GetByIdAsync(GetEnderecoEmpresaByIdRequest request)
-        => await _httpClient.GetFromJsonAsync<Response<EnderecoEmpresa?>>($"v1/endereco-empresa/{request.EmpresaId}")
+        => await _httpClient.GetFromJsonAsync<Response<EnderecoEmpresa?>>($"v1/enderecos-empresas/{request.EmpresaId}")
                 ?? new Response<EnderecoEmpresa?>(null, 400, "Falha ao buscar a endereço");
 
         public async Task<Response<EnderecoEmpresa?>> UpdateAsync(UpdateEnderecoEmpresaRequest request)
         {
-            var result = await _httpClient.PutAsJsonAsync($"v1/endereco-empresa/{request.EmpresaId}", request);
+            var result = await _httpClient.PutAsJsonAsync($"v1/enderecos-empresas/{request.EmpresaId}", request);
             return await result.Content.ReadFromJsonAsync<Response<EnderecoEmpresa?>>()
                 ?? new Response<EnderecoEmpresa?>(null, 400, "Falha ao atualizar endereço");
         }

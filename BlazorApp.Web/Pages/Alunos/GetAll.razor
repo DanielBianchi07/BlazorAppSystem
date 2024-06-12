@@ -1,0 +1,52 @@
+﻿@page "/alunos"
+@using BlazorApp.Shared.Models
+@inherits GetAllAlunosPage
+
+<MudContainer MaxWidth="MaxWidth.ExtraLarge">
+    <MudText Typo="Typo.h4" Class="mt-10 mb-6">Alunos</MudText>
+    <div class="d-flex justify-end">
+        <MudButton Variant="Variant.Filled" Color="Color.Dark" StartIcon="@Icons.TwoTone.Add" Href="/alunos/cadastrar">
+            Novo Aluno    
+        </MudButton>
+    </div>
+
+    <MudDataGrid T="Aluno" 
+        ReadOnly="@_readOnly" 
+        EditMode="@(_isCellEditMode ? DataGridEditMode.Cell : DataGridEditMode.Form)" 
+        StartedEditingItem="@StartEditItem" CommittedItemChanges="@CommitedEditItem" 
+        CanceledEditingItem="@CanceledEditItem" 
+        EditTrigger="@(_editTriggerRowClick ? DataGridEditTrigger.OnRowClick : DataGridEditTrigger.Manual)" 
+        Class="mt-1 mb-15" 
+        Items="@Alunos" 
+        Filterable="true" 
+        QuickFilter="@_quickFilter">
+        <Columns>
+            <PropertyColumn Property="x=>x.Nome" Title="Nome" />
+            <PropertyColumn Property="x=>x.Cpf" Title="CPF" />
+            <PropertyColumn Property="x=>x.Rg" Title="RG" />
+            <PropertyColumn Property="x=>x.Telefone" Title="Telefone" />
+            <PropertyColumn Property="x=>x.Email" Title="Email" />
+            <PropertyColumn Property="x=>x.Assinatura" Title="Assinatura" />
+            <PropertyColumn Property="x=>x.DataCriacao" Title="Data de Criação" />
+            <TemplateColumn>
+                <CellTemplate >
+                    <MudIconButton 
+                        Size="@Size.Small"
+                        Icon="@Icons.Material.Filled.Edit" 
+                        Color="Color.Info" 
+                        OnClick="@context.Actions.StartEditingItemAsync" />
+                </CellTemplate>
+                <CellTemplate>
+                    <MudIconButton Size="@Size.Small"
+                                   Icon="@Icons.Material.Filled.Delete"
+                                   Color="Color.Error"
+                                   OnClick="() => OnDeleteButtonActive(context.Item.Id, context.Item.Nome)" />
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+        <PagerContent>
+            <MudDataGridPager T="@Aluno" />
+        </PagerContent>
+    </MudDataGrid>
+
+</MudContainer>

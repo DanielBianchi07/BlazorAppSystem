@@ -20,6 +20,9 @@ builder.Services.AddHttpClient(
 builder.Services.AddTransient<IEmpresaHandler, EmpresaHandler>();
 builder.Services.AddTransient<IEnderecoEmpresaHandler, EnderecoEmpresaHandler>();
 builder.Services.AddTransient<IAlunoHandler, AlunoHandler>();
+builder.Services.AddTransient<IConteudoProgramaticoHandler, ConteudoProgramaticoHandler>();
+builder.Services.AddTransient<IInstrutorHandler, InstrutorHandler>();
+builder.Services.AddTransient<ICursoHandler, CursoHandler>();
 builder.Services.AddTransient<ITelefoneEmpresaHandler, TelefoneEmpresaHandler>();
 
 await builder.Build().RunAsync();

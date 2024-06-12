@@ -9,8 +9,6 @@ namespace BlazorApp.Shared.Requests.EnderecosEmpresas
 {
     public class GetEnderecoEmpresaByIdRequest : Request
     {
-        // [Required(ErrorMessage = "Id Endereço Inválido")]
-        // public Guid Id { get; set; }
         [Required(ErrorMessage = "Empresa Inválida")]
         public Guid EmpresaId { get; set; }
     }

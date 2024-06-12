@@ -1,5 +1,4 @@
-﻿@page "/alunos/cadastrar"
-@using BlazorApp.Web.Pages.Empresas
+﻿<!--page "/alunos/cadastrar"
 @inherits CreateAlunoPage
 
 <MudContainer MaxWidth="MaxWidth.Medium">
@@ -10,40 +9,13 @@
             <ObjectGraphDataAnnotationsValidator />
             <DataAnnotationsValidator />
 
-           <!-- <MudTextField DebounceInterval="100"
-                OnDebounceIntervalElapsed="HandleIntervalElapsed"
-                @bind-Value="StringEmpresa" 
-                HelperText="Selecione uma empresa" 
-                Label="Empresas" 
-                Variant="Variant.Outlined" 
-                Adornment="Adornment.End" 
-                AdornmentIcon="@Icons.Material.Filled.Search" />
-            <label>Empresa:</label>
-            <select class="form-control" @bind="InputModel.EmpresaId">
-                <option>Selecione uma empresa</option>
-                @foreach (var empresa in EmpresasFilter)
-                {
-                    <option value="@empresa.Id">@empresa.RazaoSocial</option>
-                }
-            </select>-->
-
-            <div class="form-group">
-                <label for="empresa">Empresa:</label>
-                <input type="text" class="form-control" @bind="StringEmpresa" @oninput="SearchEmpresas" />
-                <ul class="suggestions" style="list-style-type: none; padding-left: 0;">
-                    @foreach (var empresa in EmpresasFilter)
-                    {
-                        <li value="@empresa.Id">@empresa.RazaoSocial</li>
-                    }
-                </ul>
-            </div>
-
             <MudTextField Label="Nome"
                           HelperText="Campo obrigatório"
                           @bind-Value="InputModel.Nome"
                           For="@(() => InputModel.Nome)" />
 
             <MudTextField Label="CPF"
+                          Mask="@(new PatternMask("000.000.000-00"))"
                           HelperText="Campo obrigatório"
                           @bind-Value="InputModel.Cpf"
                           For="@(() => InputModel.Cpf)" />
@@ -52,11 +24,29 @@
                           HelperText="Digite seu RG"
                           @bind-Value="InputModel.Rg"
                           For="@(() => InputModel.Rg)" />
-
-            <MudTextField Label="Telefone"
-                          HelperText="Digite um telefone para contato"
-                          @bind-Value="InputModel.Telefone" 
-                          For="@(() => InputModel.Telefone)"/>
+                          
+            <MudRadioGroup @bind-Value="@SelectedOption">
+                <MudRadio Value="Telefone">Telefone</MudRadio>
+                <MudRadio Value="Celular">Celular</MudRadio>
+            </MudRadioGroup>
+            
+            @if (SelectedOption == "Telefone")
+            {
+                <MudTextField Label="Telefone"
+                              Mask="@(new PatternMask("(00) 0000-0000"))"
+                              HelperText="Digite um telefone para contato"
+                              @bind-Value="InputModel.Telefone" 
+                              For="@(() => InputModel.Telefone)"/>
+            }
+            else if (SelectedOption == "Celular")
+            {
+                <MudTextField Label="Celular"
+                              Mask="@(new PatternMask("(00) 00000-0000"))"
+                              HelperText="Digite um celular para contato"
+                              @bind-Value="InputModel.Telefone" 
+                              For="@(() => InputModel.Telefone)"/>
+            }
+            
 
             <MudTextField Label="Email"
                           HelperText="Digite um email para contato"
@@ -68,6 +58,17 @@
                           @bind-Value="InputModel.Assinatura" 
                           For="@(() => InputModel.Assinatura)"/>
 
+            <div class="form-group">
+                <label for="empresa">Empresa:</label>
+                <input type="text" class="form-control" @bind="StringEmpresa" @oninput="OnInputChanged" placeholder="Digite o nome da empresa"/>
+                <ul class="suggestions" style="list-style-type: none; padding-left: 0;">
+                    @foreach (var empresa in EmpresasFilter)
+                    {
+                        <li value="@empresa.Id">@empresa.RazaoSocial</li>
+                    }
+                </ul>
+            </div>
+
         </MudPaper>
 
         <MudButton ButtonType="ButtonType.Submit"
@@ -78,3 +79,22 @@
         </MudButton>
     </EditForm>
 </MudContainer>-->
+
+
+<!-- <MudTextField DebounceInterval="100"
+    OnDebounceIntervalElapsed="HandleIntervalElapsed"
+@bind-Value="StringEmpresa"
+    HelperText="Selecione uma empresa"
+    Label="Empresas"
+    Variant="Variant.Outlined"
+    Adornment="Adornment.End"
+    AdornmentIcon="@Icons.Material.Filled.Search" />
+<label>Empresa:</label>
+<select class="form-control" @bind="InputModel.EmpresaId">
+    <option>Selecione uma empresa</option>
+foreach (var empresa in EmpresasFilter)
+{
+        <option value="empresa.Id">empresa.RazaoSocial</option>
+}
+</select> -->
+

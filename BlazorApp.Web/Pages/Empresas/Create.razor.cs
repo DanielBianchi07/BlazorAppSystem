@@ -2,11 +2,10 @@
 using BlazorApp.Shared.Handlers;
 using BlazorApp.Shared.Models;
 using BlazorApp.Shared.Requests.Empresas;
-using BlazorApp.Shared.Requests.EnderecosEmpresas;
 using BlazorApp.Shared.Requests.TelefonesEmpresas;
-using BlazorApp.Shared.Responses;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using static MudBlazor.Colors;
 
 namespace BlazorApp.Web.Pages.Empresas
 {
@@ -76,27 +75,22 @@ namespace BlazorApp.Web.Pages.Empresas
 
         public void AddTelefone()
         {
-            if(!string.IsNullOrEmpty(Telefone))
+            if (!string.IsNullOrEmpty(Telefone))
             {
-                var tel = new TelefoneEmpresa { NroTelefone = Telefone, Status = Shared.Enums.EAtivoInativo.Ativo };
-                if(InputModel.Telefones.Count == 0)
+                if (!InputModel.Telefones.Any(c => c.NroTelefone == Telefone))
                 {
-                    InputModel.Telefones.Add(tel);
+                    InputModel.Telefones.Add(new TelefoneEmpresa { NroTelefone = Telefone, Status = Shared.Enums.EAtivoInativo.Ativo });
                 }
                 else
                 {
-                    foreach (var tele in InputModel.Telefones)
-                    {
-                        if (tele.NroTelefone != Telefone)
-                        {
-                            InputModel.Telefones.Add(tel);
-                        }
-                    }
+                    Snackbar.Add("Telefone com o mesmo número já existe.", Severity.Warning);
                 }
             }
-
+            else
+            {
+                Snackbar.Add("Preencha todos os campos corretamente.", Severity.Error);
+            }
         }
-
         protected override void OnInitialized()
         {
             InputModel.Endereco = new();

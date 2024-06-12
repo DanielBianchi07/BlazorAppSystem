@@ -13,13 +13,15 @@ namespace BlazorApp.Shared.Requests.Empresas
     public class UpdateEmpresaRequest : Request
     {
         public Guid Id { get; set; }
-
         public string CNPJ { get; set; } = string.Empty;
 
         public string RazaoSocial { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public EAtivoInativo Status { get; set; } = EAtivoInativo.Ativo;
         public DateTime? DataAlteracao { get; set; } = DateTime.Now;
+        [ValidateComplexType]
         public EnderecoEmpresa Endereco { get; set; } = null!;
+        [ValidateComplexType]
+        public List<TelefoneEmpresa> Telefones { get; set; }
     }
 }

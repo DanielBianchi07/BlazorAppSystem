@@ -10,6 +10,8 @@
   <ItemGroup>
     <None Remove="Handlers\NewFile.txt" />
     <None Remove="Pages\Alunos\NewFile.txt" />
+    <None Remove="Pages\Cursos\NewFile.txt" />
+    <None Remove="Pages\Cursos\NewFile1.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +28,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BlazorApp.Shared\BlazorApp.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\Certificados\" />
+    <Folder Include="Pages\ListasPresenca\" />
+    <Folder Include="Pages\Treinamentos\" />
   </ItemGroup>
 
 </Project>

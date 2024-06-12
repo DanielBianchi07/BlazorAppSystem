@@ -1,0 +1,88 @@
+﻿@page "/cursos/cadastrar"
+@inherits CreateCursoPage
+
+<MudContainer MaxWidth="MaxWidth.Medium" >
+    <MudText Typo="Typo.h4" Class="mt-10 mb-6">Novo Curso</MudText>
+
+    <EditForm Model="@InputModel" Context="EmpresaForm" OnValidSubmit="OnValidSubmitAsync">
+        <MudPaper Class="pa-8" Outlined="true">
+            <ObjectGraphDataAnnotationsValidator />
+            <DataAnnotationsValidator />
+            <MudTextField Label="Nome do Curso"
+                          HelperText="Campo obrigatório"
+                          @bind-Value="InputModel.Nome"
+                          For="@(() => InputModel.Nome)" />
+
+            <MudTextField Label="Logo"
+                          HelperText="Campo obrigatório"
+                          @bind-Value="InputModel.Logo"
+                          For="@(() => InputModel.Logo)" />
+
+            <MudTextField Label="Carga Horária Inicial"
+                          HelperText="Campo Obrigatório"
+                          @bind-Value="InputModel.CargaHorariaInicial"
+                          For="@(() => InputModel.CargaHorariaInicial)" />
+
+            <MudTextField Label="Carga Horária Periódica"
+                          HelperText="Campo Obrigatório"
+                          @bind-Value="InputModel.CargaHorariaPeriodico"
+                          For="@(() => InputModel.CargaHorariaPeriodico)" />
+
+            <MudTextField Label="Validade"
+                          HelperText="Campo Obrigatório"
+                          @bind-Value="InputModel.Validade"
+                          For="@(() => InputModel.Validade)" />
+        </MudPaper>
+
+        <MudText Typo="Typo.h5" Class="mt-10 mb-6">Conteúdos Programáticos</MudText>
+        <MudPaper Class="pa-8 mt-4" Outlined="true">
+
+                <div class="d-fles justify-start">
+                    <MudTextField Label="Assunto"
+                              HelperText="Digite o assunto do conteúdo"
+                              @bind-Value="Subject" />
+
+                    <MudTextField Label="Carga Horária"
+                              HelperText="Digite a carga horária do conteúdo"
+                              Mask="@(new PatternMask("00"))"
+                              @bind-Value="HourQuantity" />
+                </div>
+                <div class="d-flex justify-start">
+                    <div>
+                        <MudButton @onclick="AddConteudo" 
+                                   Variant="Variant.Filled"
+                                   Color="Color.Secondary"
+                                   Class="mt-8 mb-10"
+                                   Size="Size.Small" >
+                            Adicionar
+                        </MudButton>
+                    </div>
+                    <MudContainer>
+                        <div class="d-flex justify-end">
+                            @if(Conteudos.Count == 0)
+                            {
+                                <p></p>
+                            }
+                            else
+                            {
+                            @foreach (var conteudo in Conteudos)
+                                {
+                                    <p>Assunto</p>
+                                    <MudText Typo="Typo.body1">@conteudo.Assunto</MudText>
+                                    <p>Carga Horária</p>
+                                    <MudText Typo="Typo.body1">@conteudo.CargaHoraria</MudText>
+                                }
+                            }
+                        </div>
+                    </MudContainer>
+                </div>
+        </MudPaper>
+
+        <MudButton ButtonType="ButtonType.Submit"
+                   Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   Class="mt-8 mb-10">
+            Cadastrar
+        </MudButton>
+    </EditForm>
+</MudContainer>

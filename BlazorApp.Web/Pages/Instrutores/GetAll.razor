@@ -1,0 +1,54 @@
+<!--  "/instrutores"
+@inherits GetAllInstrutorPage
+<MudContainer MaxWidth="MaxWidth.ExtraLarge">
+    <MudText Typo="Typo.h4" Class="mt-10 mb-6">Instrutores</MudText>
+    <div class="d-flex justify-end">
+        <MudButton Variant="Variant.Filled" Color="Color.Dark" StartIcon="@Icons.TwoTone.Add" Href="/instrutores/cadastrar">
+            Novo Instrutor    
+        </MudButton>
+    </div>
+
+    <MudDataGrid T="Instrutor" 
+        ReadOnly="@_readOnly" 
+        EditMode="@(_isCellEditMode ? DataGridEditMode.Cell : DataGridEditMode.Form)" 
+        StartedEditingItem="@StartEditItem" CommittedItemChanges="@CommitedEditItem" 
+        CanceledEditingItem="@CanceledEditItem" 
+        EditTrigger="@(_editTriggerRowClick ? DataGridEditTrigger.OnRowClick : DataGridEditTrigger.Manual)" 
+        Class="mt-1 mb-15" 
+        Items="@Instrutores" 
+        Filterable="true" 
+        QuickFilter="@_quickFilter">
+        <Columns>
+            <PropertyColumn Property="x=>x.Nome" Title="Nome" />
+            <PropertyColumn Property="x=>x.Cpf" Title="CPF" />
+            <PropertyColumn Property="x=>x.Especializacao" Title="Especialização" />
+            <PropertyColumn Property="x=>x.Registro" Title="Registro" />
+            <PropertyColumn Property="x=>x.Email" Title="Email" />
+            <PropertyColumn Property="x=>x.Telefone" Title="Telefone" />
+            <PropertyColumn Property="x=>x.Assinatura" Title="Assinatura" />
+            <PropertyColumn Property="x=>x.Treinamento" Title="Treinamento" />
+            <TemplateColumn Hidden="@(_isCellEditMode || _readOnly || _editTriggerRowClick)" Class="d-flex justify-end">
+                <CellTemplate>
+                    <MudIconButton 
+                        Size="@Size.Small"
+                        Icon="@Icons.Material.Filled.Edit" 
+                        Color="Color.Info" 
+                        OnClick="@context.Actions.StartEditingItemAsync" />
+                </CellTemplate>
+            </TemplateColumn>
+            <TemplateColumn Class="d-flex justify-end">
+                <CellTemplate>
+                        <MudIconButton 
+                            Size="@Size.Small"
+                            Icon="@Icons.Material.Filled.Delete" 
+                            Color="Color.Error" 
+                            OnClick="() => OnDeleteButtonActive(context.Item.Id, context.Item.Nome)" />
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+        <PagerContent>
+            <MudDataGridPager T="@Instrutor" />
+        </PagerContent>
+    </MudDataGrid>
+
+</MudContainer> -->

@@ -1,10 +1,10 @@
-﻿@page "/empresas/cadastrar"
-@inherits CreateEmpresaPage
+﻿@page "/empresas/editar/{id}"
+@inherits UpdateEmpresaPage
 
 <MudContainer MaxWidth="MaxWidth.Medium">
     <MudText Typo="Typo.h4" Class="mt-10 mb-6">Nova Empresa</MudText>
 
-    <EditForm Model="@InputModel" Context="EmpresaForm" OnValidSubmit="OnValidSubmitAsync">
+    <EditForm Model="@InputModel" Context="EmpresaForm" OnValidSubmit="OnValidSubmitAsync" >
         <MudPaper Class="pa-8" Outlined="true">
             <ObjectGraphDataAnnotationsValidator />
             <DataAnnotationsValidator />
@@ -14,7 +14,7 @@
                           For="@(() => InputModel.RazaoSocial)" />
 
             <MudTextField Label="CNPJ"
-                Mask="@(new PatternMask("00.000.000/0000-00"))"
+                          Mask="@(new PatternMask("00.000.000/0000-00"))"
                           HelperText="Campo obrigatório"
                           @bind-Value="InputModel.CNPJ"
                           For="@(() => InputModel.CNPJ)" />
@@ -23,40 +23,6 @@
                           HelperText="Digite um email para contato"
                           @bind-Value="InputModel.Email"
                           For="@(() => InputModel.Email)" />
-
-                <div class="d-fles justify-start">
-                    <MudTextField Label="Telefones"
-                              Mask="@(new PatternMask("(00) 00000-0000"))"
-                              HelperText="Digite um telefone para contato"
-                              @bind-Value="Telefone" />
-                </div>
-                <div class="d-flex justify-start">
-                    <div>
-                        <MudButton @onclick="AddTelefone" 
-                                   Variant="Variant.Filled"
-                                   Color="Color.Secondary"
-                                   Class="mt-8 mb-10"
-                                   Size="Size.Small" >
-                            Adicionar
-                        </MudButton>
-                    </div>
-                    <MudContainer>
-                        <div class="d-flex justify-end">
-                            @if(InputModel.Telefones.Count == 0)
-                            {
-                                <p></p>
-                            }
-                            else
-                            {
-                                <h3>Telefones</h3>
-                                @foreach(var tel in InputModel.Telefones)
-                                {
-                                    <MudText Typo="Typo.h4">@tel.NroTelefone</MudText>
-                                }
-                            }
-                        </div>
-                    </MudContainer>
-                </div>
 
         </MudPaper>
 

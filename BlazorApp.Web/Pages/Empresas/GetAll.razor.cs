@@ -79,52 +79,6 @@ namespace BlazorApp.Web.Pages.Empresas
                 return true;
             return false;
         };
-        #region UpdateTable
-        public bool _readOnly;
-        public bool _isCellEditMode;
-        public bool _editTriggerRowClick;
         #endregion
-        public async Task StartEditItem(Empresa empresa)
-        {
-            UpdateEmpresaRequest request = new UpdateEmpresaRequest
-            {
-                Id = empresa.Id,
-                CNPJ = empresa.CNPJ,
-                RazaoSocial = empresa.RazaoSocial,
-                Email = empresa.Email,
-                Status = empresa.Status,
-            };
-            var result = await Handler.UpdateAsync(request);
-        }
-
-        public async Task CanceledEditItem(Empresa empresa)
-        {
-            UpdateEmpresaRequest request = new UpdateEmpresaRequest
-            {
-                Id = empresa.Id,
-                CNPJ = empresa.CNPJ,
-                RazaoSocial = empresa.RazaoSocial,
-                Email = empresa.Email,
-                Status = empresa.Status,
-            };
-            var result = await Handler.UpdateAsync(request);
-        }
-
-        public async Task CommitedEditItem(Empresa empresa)
-        {
-            var request = new UpdateEmpresaRequest
-            {
-                Id = empresa.Id,
-                CNPJ = empresa.CNPJ,
-                RazaoSocial = empresa.RazaoSocial,
-                Email = empresa.Email,
-                Status = empresa.Status,
-            };
-            var result = await Handler.UpdateAsync(request);
-
-            Snackbar.Add(result.Message, Severity.Info);
-        }
-        #endregion
-
     }
 }
