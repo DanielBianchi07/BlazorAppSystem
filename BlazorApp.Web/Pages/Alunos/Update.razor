@@ -1,15 +1,14 @@
-﻿@page "/alunos/cadastrar"
-@inherits CreateAlunoPage
+﻿@page "/alunos/editar/{id}"
+@inherits UpdateAlunoPage
 
 <MudContainer MaxWidth="MaxWidth.Medium">
-    <MudText Typo="Typo.h4" Class="mt-10 mb-6">Novo Aluno</MudText>
+    <MudText Typo="Typo.h4" Class="mt-10 mb-6">Atualizar Aluno</MudText>
 
-    <EditForm Model="@InputModel" Context="AlunoForm" OnValidSubmit="OnValidSubmitAsync">
+    <EditForm Model="InputModel" Context="AlunoForm" OnValidSubmit="OnValidSubmitAsync" >
         <MudPaper Class="pa-8" Outlined="true">
             <ObjectGraphDataAnnotationsValidator />
             <DataAnnotationsValidator />
-
-            <MudTextField Label="Nome"
+             <MudTextField Label="Nome"
                           HelperText="Campo obrigatório"
                           @bind-Value="InputModel.Nome"
                           For="@(() => InputModel.Nome)" />
@@ -25,10 +24,11 @@
                           @bind-Value="InputModel.Rg"
                           For="@(() => InputModel.Rg)" />
                           
-            <MudTextField Label="Telefone"
+            <MudTextField Label="Celular"
                             Mask="@(new PatternMask("(00) 00000-0000"))"
-                            HelperText="Digite um número de telefone para contato"
-                            @bind-Value="InputModel.Telefone" />            
+                            HelperText="Digite um celular para contato"
+                            @bind-Value="InputModel.Telefone" 
+                            For="@(() => InputModel.Telefone)"/>
 
             <MudTextField Label="Email"
                           HelperText="Digite um email para contato"
@@ -40,15 +40,15 @@
                           @bind-Value="InputModel.Assinatura" 
                           For="@(() => InputModel.Assinatura)"/>
 
-             <MudSelect T="string"
+           <MudSelect T="string"
                        Label="Empresa"
-                       @bind-Value="SelectedEmpresaId"
-                       AnchorOrigin="Origin.BottomCenter">
+                       AnchorOrigin="Origin.BottomCenter"
+                        @bind-Value="SelectedEmpresaId">
                 @foreach (var empresa in TodasEmpresas)
                 {
-                    <MudSelectItem T="string" Value="@empresa.Id.ToString()">
-                        @empresa.RazaoSocial
-                    </MudSelectItem>
+                        <MudSelectItem T="string" Value="@empresa.Id.ToString()">
+                            @empresa.RazaoSocial
+                        </MudSelectItem>
                 }
             </MudSelect>
 
@@ -58,7 +58,7 @@
                    Variant="Variant.Filled"
                    Color="Color.Primary"
                    Class="mt-8 mb-10">
-            Cadastrar
+            Atualizar
         </MudButton>
     </EditForm>
 </MudContainer>

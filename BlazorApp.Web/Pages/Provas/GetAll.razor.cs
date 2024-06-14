@@ -1,18 +1,17 @@
 ﻿using BlazorApp.Shared.Handlers;
 using BlazorApp.Shared.Models;
-using BlazorApp.Shared.Requests;
+using BlazorApp.Shared.Requests.Provas;
 using BlazorApp.Shared.Requests.Cursos;
-using BlazorApp.Shared.Requests.ConteudosProgramaticos;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
-namespace BlazorApp.Web.Pages.Cursos
+namespace BlazorApp.Web.Pages.Provas
 {
-    public partial class GetAllCursosPage : ComponentBase
+    public partial class GetAllProvaPage : ComponentBase
     {
         #region Properties
         public bool IsBusy { get; set; } = false;
-        public List<Curso> Cursos { get; set; } = [];
+        public List<Prova> Provas { get; set; } = [];
         #endregion
 
         #region Services
@@ -21,7 +20,9 @@ namespace BlazorApp.Web.Pages.Cursos
         [Inject]
         public IDialogService Dialog { get; set; } = null!;
         [Inject]
-        public ICursoHandler Handler { get; set; } = null!;
+        public IProvaHandler Handler { get; set; } = null!;
+        [Inject]
+        public ICursoHandler CursoHandler { get; set; } = null!;
         #endregion
 
         #region Overrides
@@ -30,10 +31,19 @@ namespace BlazorApp.Web.Pages.Cursos
             IsBusy = true;
             try
             {
-                var request = new GetAllCursosRequest();
+                var request = new GetAllProvasRequest();
                 var result = await Handler.GetAllAsync(request);
+                //
                 if (result.IsSuccess)
-                    Cursos = result.Dados ?? [];
+                    Provas = result.Dados ?? [];
+                foreach (var prova in Provas)
+                {
+                    var requestcur = new GetCursoByIdRequest { Id = prova.CursoId};
+                    var resultcur = await CursoHandler.GetByIdAsync(requestcur);
+
+                    if (resultcur.IsSuccess)
+                        prova.Curso = resultcur.Dados;
+                }
             }
             catch (Exception ex)
             {
@@ -47,26 +57,26 @@ namespace BlazorApp.Web.Pages.Cursos
         #endregion
 
         #region Methods
-        public async void OnDeleteButtonActive(Guid id, string nome)
+        public async void OnDeleteButtonActive(Guid id, string curso)
         {
-            var result = await Dialog.ShowMessageBox("CUIDADO!", $"Tem certeza que deseja excluir o curso {nome}", yesText: "Excluir", cancelText: "Cancelar");
+            var result = await Dialog.ShowMessageBox("CUIDADO!", $"Tem certeza que deseja excluir a prova referente ao curso {curso}", yesText: "Excluir", cancelText: "Cancelar");
 
             if (result is true)
-                await OnDeleteAsync(id, nome);
+                await OnDeleteAsync(id, curso);
             StateHasChanged();
         }
 
-        public async Task OnDeleteAsync(Guid id, string nome)
+        public async Task OnDeleteAsync(Guid id, string curso)
         {
             try
             {
-                var request = new DeleteCursoRequest()
+                var request = new DeleteProvaRequest()
                 {
                     Id = id,
                 };
                 await Handler.DeleteAsync(request);
-                Cursos.RemoveAll(x => x.Id == id);
-                Snackbar.Add($"Curso {nome} inativado", Severity.Info);
+                Provas.RemoveAll(x => x.Id == id);
+                Snackbar.Add($"Prova de {curso} inativada", Severity.Info);
             }
             catch (Exception ex)
             {
@@ -74,12 +84,13 @@ namespace BlazorApp.Web.Pages.Cursos
             }
         }
 
-        public Func<Curso, bool> _quickFilter => x =>
+        public Func<Prova, bool> _quickFilter => x =>
         {
             if (x.Status == Shared.Enums.EAtivoInativo.Ativo)
                 return true;
             return false;
         };
         #endregion
+
     }
 }

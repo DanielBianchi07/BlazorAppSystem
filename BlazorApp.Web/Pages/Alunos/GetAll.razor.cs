@@ -79,58 +79,6 @@ namespace BlazorApp.Web.Pages.Alunos
                 return true;
             return false;
         };
-        #region UpdateTable
-        public bool _readOnly;
-        public bool _isCellEditMode;
-        public bool _editTriggerRowClick;
         #endregion
-        public async Task StartEditItem(Aluno aluno)
-        {
-            UpdateAlunoRequest request = new UpdateAlunoRequest
-            {
-                Id = aluno.Id,
-                Nome = aluno.Nome,
-                Cpf = aluno.Cpf,
-                Rg = aluno.Rg,
-                Telefone = aluno.Telefone,
-                Email = aluno.Email,
-                Assinatura = aluno.Assinatura,
-            };
-            var result = await Handler.UpdateAsync(request);
-        }
-
-        public async Task CanceledEditItem(Aluno aluno)
-        {
-            UpdateAlunoRequest request = new UpdateAlunoRequest
-            {
-                Id = aluno.Id,
-                Nome = aluno.Nome,
-                Cpf = aluno.Cpf,
-                Rg = aluno.Rg,
-                Telefone = aluno.Telefone,
-                Email = aluno.Email,
-                Assinatura = aluno.Assinatura,
-            };
-            var result = await Handler.UpdateAsync(request);
-        }
-
-        public async Task CommitedEditItem(Aluno aluno)
-        {
-            var request = new UpdateAlunoRequest
-            {
-                Id = aluno.Id,
-                Nome = aluno.Nome,
-                Cpf = aluno.Cpf,
-                Rg = aluno.Rg,
-                Telefone = aluno.Telefone,
-                Email = aluno.Email,
-                Assinatura = aluno.Assinatura,
-            };
-            var result = await Handler.UpdateAsync(request);
-
-            Snackbar.Add(result.Message, Severity.Info);
-        }
-        #endregion
-
     }
 }

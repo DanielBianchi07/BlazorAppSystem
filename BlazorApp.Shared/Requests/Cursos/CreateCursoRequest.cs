@@ -13,7 +13,6 @@ namespace BlazorApp.Shared.Requests.Cursos
     {
         [Required(ErrorMessage = "Nome de Curso Inválido")]
         public string Nome { get; set; } = string.Empty;
-        [Required(ErrorMessage = "Logo Inválida")]
         public string Logo { get; set; } = string.Empty;
         [Required(ErrorMessage = "Carga Horária Inicial Inválida")]
         public int CargaHorariaInicial { get; set; }

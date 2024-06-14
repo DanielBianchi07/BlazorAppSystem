@@ -1,0 +1,73 @@
+﻿@page "/treinamentos/visualizar/{id}"
+@inherits ReadTreinamentoPage
+
+
+<MudContainer Class="mt-4">
+    <MudPaper Class="p-4">
+        <MudText Typo="Typo.h4">Detalhes do Treinamento</MudText>
+        <MudDivider Class="mb-4" />
+
+        <!-- Curso Details -->
+        <MudText Typo="Typo.h5">Curso</MudText>
+        <MudPaper Class="p-2 mb-4">
+            <MudGrid>
+                <MudItem xs="12" sm="6">
+                    <MudText Typo="Typo.body1"><strong>Nome:</strong> @Treinamento?.Curso?.Nome</MudText>
+                </MudItem>
+            </MudGrid>
+        </MudPaper>
+
+        <!-- Empresas Details -->
+        <MudText Typo="Typo.h5">Empresas</MudText>
+        <MudPaper Class="p-2 mb-4">
+            @if (Treinamento?.Empresas?.Count > 0)
+            {
+                @foreach (var empresa in Treinamento.Empresas)
+                {
+                    <MudText Typo="Typo.body1">@empresa.RazaoSocial</MudText>
+                }
+            }
+            else
+            {
+                <MudText Typo="Typo.body1">Nenhuma empresa associada.</MudText>
+            }
+        </MudPaper>
+
+        <!-- Alunos Details -->
+        <MudText Typo="Typo.h5">Alunos</MudText>
+        <MudPaper Class="p-2 mb-4">
+            @if (Treinamento?.Alunos?.Count > 0)
+            {
+                @foreach (var aluno in Treinamento.Alunos)
+                {
+                    <MudText Typo="Typo.body1">@aluno.Nome</MudText>
+                }
+            }
+            else
+            {
+                <MudText Typo="Typo.body1">Nenhum aluno associado.</MudText>
+            }
+        </MudPaper>
+
+        <!-- Instrutores Details -->
+        <MudText Typo="Typo.h5">Instrutores</MudText>
+        <MudPaper Class="p-2 mb-4">
+            @if (Treinamento?.Instrutores?.Count > 0)
+            {
+                @foreach (var instrutor in Treinamento.Instrutores)
+                {
+                    <MudText Typo="Typo.body1">@instrutor.Nome</MudText>
+                }
+            }
+            else
+            {
+                <MudText Typo="Typo.body1">Nenhum instrutor associado.</MudText>
+            }
+        </MudPaper>
+
+        <!-- Back Button -->
+        <MudButton Variant="Variant.Text" Color="@Color.Primary" OnClick="BackToList">
+            <MudIcon Icon="@Icons.Material.Filled.ArrowBack" /> Voltar
+        </MudButton>
+    </MudPaper>
+</MudContainer>

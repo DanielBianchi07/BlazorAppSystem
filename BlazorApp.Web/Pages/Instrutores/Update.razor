@@ -1,0 +1,56 @@
+﻿@page "/instrutores/editar/{id}"
+@inherits UpdateInstrutorPage
+
+<MudContainer MaxWidth="MaxWidth.Medium">
+    <MudText Typo="Typo.h4" Class="mt-10 mb-6">Novo Instrutor</MudText>
+
+    <EditForm Model="@InputModel" Context="InstrutorForm" OnValidSubmit="OnValidSubmitAsync" >
+        <MudPaper Class="pa-8" Outlined="true">
+            <ObjectGraphDataAnnotationsValidator />
+            <DataAnnotationsValidator />
+            <MudTextField Label="Nome"
+                        HelperText="Campo obrigatório"
+                        @bind-Value="InputModel.Nome"
+                        For="@(() => InputModel.Nome)" />
+
+            <MudTextField Label="CPF"
+                Mask="@(new PatternMask("000.000.000-00"))"
+                        HelperText="Campo obrigatório"
+                        @bind-Value="InputModel.Cpf"
+                        For="@(() => InputModel.Cpf)" />
+
+            <MudTextField Label="Especialização"
+                        HelperText="Digite sua especialização"
+                        @bind-Value="InputModel.Especializacao"
+                        For="@(() => InputModel.Especializacao)" />
+
+            <MudTextField Label="Registro"
+                        HelperText="Digite seu registro"
+                        @bind-Value="InputModel.Registro" 
+                        For="@(() => InputModel.Registro)"/>
+
+            <MudTextField Label="Email"
+                        HelperText="Digite um email para contato"
+                        @bind-Value="InputModel.Email" 
+                        For="@(() => InputModel.Email)"/>
+
+            <MudTextField Label="Telefone"
+                        Mask="@(new PatternMask("(00) 00000-0000"))"
+                        HelperText="Digite um telefone para contato"
+                        @bind-Value="InputModel.Telefone" 
+                        For="@(() => InputModel.Telefone)"/>
+
+            <MudTextField Label="Assinatura"
+                        HelperText="Inclua uma assinatura"
+                        @bind-Value="InputModel.Assinatura" 
+                        For="@(() => InputModel.Assinatura)"/>
+        </MudPaper>
+
+        <MudButton ButtonType="ButtonType.Submit"
+                   Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   Class="mt-8 mb-10">
+            Atualizar
+        </MudButton>
+    </EditForm>
+</MudContainer>

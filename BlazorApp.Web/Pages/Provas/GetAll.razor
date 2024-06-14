@@ -1,14 +1,15 @@
-@page "/instrutores"
-@inherits GetAllInstrutoresPage
+@page "/provas"
+@inherits GetAllProvaPage
+
 <MudContainer MaxWidth="MaxWidth.ExtraLarge">
-    <MudText Typo="Typo.h4" Class="mt-10 mb-6">Instrutores</MudText>
+    <MudText Typo="Typo.h4" Class="mt-10 mb-6">Prova</MudText>
     <div class="d-flex justify-end">
-        <MudButton Size="@Size.Medium" Href="/instrutores/cadastrar" Color="@Color.Success" StartIcon="@Icons.Material.Filled.AddCircleOutline" Class="add-item-btn">Adicionar Instrutor</MudButton>
+        <MudButton Size="@Size.Medium" Href="/provas/cadastrar" Color="@Color.Success" StartIcon="@Icons.Material.Filled.AddCircleOutline" Class="add-item-btn">Adicionar Prova</MudButton>
     </div>
 
-    <MudDataGrid T="Instrutor" 
+    <MudDataGrid T="Prova" 
         Class="mt-1 mb-15" 
-        Items="@Instrutores" 
+        Items="@Provas" 
         Filterable="true"
         QuickFilter="@_quickFilter"
         Bordered="true">
@@ -20,29 +21,29 @@
                             Size="@Size.Small"
                             Icon="@Icons.Material.Filled.Edit" 
                             Color="Color.Info" 
-                            Href="@($"/instrutores/editar/{context.Item.Id}")" />
+                            Href="@($"/provas/editar/{context.Item.Id}")" />
                     </MudGrid>
                 </CellTemplate>
             </TemplateColumn>
-            <PropertyColumn Property="x=>x.Nome" Title="Nome" />
-            <PropertyColumn Property="x=>x.Cpf" Title="CPF" />
-            <PropertyColumn Property="x=>x.Especializacao" Title="Especializacao" />
-            <PropertyColumn Property="x=>x.Registro" Title="Registro" />
-            <PropertyColumn Property="x=>x.Email" Title="Email" />
-            <PropertyColumn Property="x=>x.Telefone" Title="Telefone" />
+            <TemplateColumn Title="Curso">
+                <CellTemplate>
+                    @(context.Item.Curso?.Nome ?? "N/A")
+                </CellTemplate>
+            </TemplateColumn>
+            <PropertyColumn Property="x=>x.DataCriacao" Title="Data de Criação" />
             <TemplateColumn StickyRight="true" Filterable="false" Sortable="false">
                 <CellTemplate>
                     <MudGrid Justify="@Justify.Center">
                         <MudIconButton Size="@Size.Small"
                             Icon="@Icons.Material.Filled.Delete"
                             Color="Color.Error"
-                            OnClick="() => OnDeleteButtonActive(context.Item.Id, context.Item.Nome)" />
+                            OnClick="() => OnDeleteButtonActive(context.Item.Id, context.Item.Curso.Nome)" />
                     </MudGrid>
                 </CellTemplate>
             </TemplateColumn>
         </Columns>
         <PagerContent>
-            <MudDataGridPager T="@Instrutor" />
+            <MudDataGridPager T="@Prova" />
         </PagerContent>
     </MudDataGrid>
 

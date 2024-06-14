@@ -5,11 +5,23 @@
 <MudSnackbarProvider />
 
 <MudLayout>
-    <MudAppBar Color="Color.Dark">
-        <h3>BlazorAppSystem</h3>
-    </MudAppBar>
     <MudMainContent>
         <MudContainer>
+    <MudAppBar Color="Color.Primary">
+        <MudGrid Spacing="3" Justify="Justify.Center">
+            <MudButton Color="@Color.Inherit" Href="/empresas" StartIcon="@Icons.Material.Filled.Apartment">Empresas</MudButton>
+            <MudDivider Vertical="true" FlexItem="true" />
+            <MudButton Color="@Color.Inherit" Href="/alunos" StartIcon="@Icons.Material.Filled.Person">Alunos</MudButton>
+            <MudDivider Vertical="true" FlexItem="true" />
+            <MudButton Color="@Color.Inherit" Href="/Instrutores" StartIcon="@Icons.Material.Filled.School">Instrutores</MudButton>
+            <MudDivider Vertical="true" FlexItem="true" />
+            <MudButton Color="@Color.Inherit" Href="/treinamentos" StartIcon="@Icons.Material.Filled.ModeEdit">Treinamentos</MudButton>
+            <MudDivider Vertical="true" FlexItem="true" />
+            <MudButton Color="@Color.Inherit" Href="/provas" StartIcon="@Icons.Material.Filled.ContentPaste">Provas</MudButton>
+            <MudDivider Vertical="true" FlexItem="true" />
+            <MudButton Color="@Color.Inherit" Href="/cursos" StartIcon="@Icons.Material.Filled.ContentPaste">Cursos</MudButton>
+        </MudGrid>
+    </MudAppBar>
                 @Body
         </MudContainer>
     </MudMainContent>

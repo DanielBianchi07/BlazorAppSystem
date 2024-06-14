@@ -1,0 +1,88 @@
+@page "/provas/cadastrar"
+@using BlazorApp.Shared.Enums
+@inherits CreateProvaPage
+
+<MudContainer MaxWidth="MaxWidth.Medium">
+    <MudText Typo="Typo.h4" Class="mt-10 mb-6">Nova Prova</MudText>
+
+    <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
+        <MudPaper Class="pa-8" Outlined="true">
+            <ObjectGraphDataAnnotationsValidator />
+            <DataAnnotationsValidator />
+
+            <MudSelect @bind-Value="cursoId" Label="Curso" Required="true">
+                @foreach (var curso in Cursos)
+                {
+                    <MudSelectItem Value="@curso.Id.ToString()">@curso.Nome</MudSelectItem>
+                }
+            </MudSelect>
+
+            <MudDivider Class="mt-6 mb-6" />
+
+            <MudTextField Label="Conteúdo da questão"
+                          HelperText="Digite o conteúdo da questão"
+                          @bind-Value="Questao" />
+            <MudButton @onclick="AddQuestao" 
+                       Variant="Variant.Filled"
+                       Color="Color.Secondary"
+                       Class="mt-2 mb-4"
+                       Size="Size.Small">
+                Adicionar Questão
+            </MudButton>
+
+            @if (Questoes.Count > 0)
+            {
+                @foreach (var questao in Questoes)
+                {
+                    <MudPaper Class="pa-4 mb-4" Outlined="true">
+                        <MudText Typo="Typo.body1">@questao.Conteudo</MudText>
+
+                        <MudTextField Label="Alternativa"
+                                      HelperText="Digite o conteúdo da alternativa"
+                                      @bind-Value="Alternativa" />
+                        <MudSelect T="ERespostaAlternativa"
+                                   Label="Resultdo"
+                                   @bind-Value="Resposta"
+                                   AnchorOrigin="Origin.BottomCenter"
+                                   Class="mb-5 pa-2">
+                            <MudSelectItem T="ERespostaAlternativa" Value="ERespostaAlternativa.Certa">
+                                Certa
+                            </MudSelectItem>
+                            <MudSelectItem T="ERespostaAlternativa" Value="ERespostaAlternativa.Errada">
+                                Errada
+                            </MudSelectItem>
+
+                        </MudSelect>
+                        <MudButton @onclick="() => AddAlternativa(questao.Id)" 
+                                   Variant="Variant.Filled"
+                                   Color="Color.Secondary"
+                                   Class="mt-2 mb-4"
+                                   Size="Size.Small">
+                            Adicionar Alternativa
+                        </MudButton>
+
+                        @if (Alternativas != null && Alternativas.Count > 0)
+                        {
+                            @foreach (var alter in Alternativas)
+                            {
+                                @if (alter.QuestaoId == questao.Id)
+                                {
+                                    <div class="d-flex align-items-center mb-2">
+                                        <MudText Typo="Typo.body2">@alter.Conteudo</MudText>
+                                    </div>
+                                }
+                            }
+                        }
+                    </MudPaper>
+                }
+            }
+        </MudPaper>
+        
+        <MudButton ButtonType="ButtonType.Submit"
+                   Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   Class="mt-8 mb-10">
+            Cadastrar
+        </MudButton>
+    </EditForm>
+</MudContainer>

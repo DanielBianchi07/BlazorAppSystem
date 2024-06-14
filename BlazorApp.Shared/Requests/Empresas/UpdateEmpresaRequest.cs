@@ -22,6 +22,6 @@ namespace BlazorApp.Shared.Requests.Empresas
         [ValidateComplexType]
         public EnderecoEmpresa Endereco { get; set; } = null!;
         [ValidateComplexType]
-        public List<TelefoneEmpresa> Telefones { get; set; }
+        public List<TelefoneEmpresa> Telefones { get; set; } = new();
     }
 }

@@ -11,29 +11,29 @@ namespace BlazorApp.Web.Handlers
         private readonly HttpClient _httpClient = httpClientFactory.CreateClient(WebConfiguration.HttpClientName);
         public async Task<Response<TelefoneEmpresa?>> CreateAsync(CreateTelefoneEmpresaRequest request)
         {
-            var result = await _httpClient.PostAsJsonAsync("v1/telefones-empresas", request);
+            var result = await _httpClient.PostAsJsonAsync("v1/telefone-empresas", request);
             return await result.Content.ReadFromJsonAsync<Response<TelefoneEmpresa?>>()
                 ?? new Response<TelefoneEmpresa?>(null, 400, "Falha ao criar o telefone.");
         }
 
         public async Task<Response<TelefoneEmpresa?>> DeleteAsync(DeleteTelefoneEmpresaRequest request)
         {
-            var result = await _httpClient.DeleteAsync($"v1/telefones-empresas/{request.Id}");
+            var result = await _httpClient.DeleteAsync($"v1/telefone-empresas/{request.Id}");
             return await result.Content.ReadFromJsonAsync<Response<TelefoneEmpresa?>>()
                 ?? new Response<TelefoneEmpresa?>(null, 400, "Falha ao inativar o telefone.");
         }
 
         public async Task<Response<TelefoneEmpresa?>> GetByIdAsync(GetTelefoneEmpresaByIdRequest request)
-            => await _httpClient.GetFromJsonAsync<Response<TelefoneEmpresa?>>($"v1/telefones-empresas/{request.Id}")
+            => await _httpClient.GetFromJsonAsync<Response<TelefoneEmpresa?>>($"v1/telefone-empresas/{request.Id}")
                 ?? new Response<TelefoneEmpresa?>(null, 400, "Falha ao buscar o telefone pelo id.");
 
         public async Task<PagedResponse<List<TelefoneEmpresa>?>> GetByEmpresaAsync(GetTelefonesByEmpresasRequest request)
-            => await _httpClient.GetFromJsonAsync<PagedResponse<List<TelefoneEmpresa>?>>($"v1/telefones-empresas/empresa/{request.EmpresaId}")
-                ?? new PagedResponse<List<TelefoneEmpresa>?>(null, 400, "Falha ao buscar os telefones da empresa.");
+            => await _httpClient.GetFromJsonAsync<PagedResponse<List<TelefoneEmpresa>?>>($"v1/telefone-empresas/empresa/{request.EmpresaId}")
+                ?? new PagedResponse<List<TelefoneEmpresa>?>(null, 400, "Falha ao buscar o telefone de uma empresa.");
 
         public async Task<Response<TelefoneEmpresa?>> UpdateAsync(UpdateTelefoneEmpresaRequest request)
         {
-            var result = await _httpClient.PutAsJsonAsync($"v1/telefones-empresa/{request.Id}", request);
+            var result = await _httpClient.PutAsJsonAsync($"v1/telefone-empresas/{request.Id}", request);
             return await result.Content.ReadFromJsonAsync<Response<TelefoneEmpresa?>>()
                 ?? new Response<TelefoneEmpresa?>(null, 400, "Falha ao atualizar o telefone.");
         }

@@ -8,13 +8,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\NewFile.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Handlers\NewFile.txt" />
     <None Remove="Pages\Alunos\NewFile.txt" />
     <None Remove="Pages\Cursos\NewFile.txt" />
     <None Remove="Pages\Cursos\NewFile1.txt" />
+    <None Remove="Pages\Instrutores\NewFile.txt" />
+    <None Remove="Pages\ListasPresenca\NewFile.txt" />
+    <None Remove="Pages\ListasPresenca\Report\NewFile.txt" />
+    <None Remove="Pages\ListasPresenca\Report\RptListaPresenca" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="iTextSharp" Version="5.5.13.3" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.5" PrivateAssets="all" />
 	<PackageReference Include="Microsoft.AspNetCore.Components.DataAnnotations.Validation" Version="3.2.0-rc1.20223.4" />
@@ -32,8 +41,6 @@
 
   <ItemGroup>
     <Folder Include="Pages\Certificados\" />
-    <Folder Include="Pages\ListasPresenca\" />
-    <Folder Include="Pages\Treinamentos\" />
   </ItemGroup>
 
 </Project>

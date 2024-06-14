@@ -135,6 +135,9 @@ namespace BlazorApp.Api.Handlers
                     .AsNoTracking()
                     .FirstOrDefaultAsync(x => x.Id == request.Id);
 
+                var empresa = context.Empresas.AsNoTracking().Where(x => x.Alunos.Any(x => x.Id == request.Id));
+                aluno.Empresas.Add(empresa.LastOrDefault());
+
                 return aluno is null
                     ? new Response<Aluno?>(null, 404, "Aluno não encontrado")
                     : new Response<Aluno?>(aluno);

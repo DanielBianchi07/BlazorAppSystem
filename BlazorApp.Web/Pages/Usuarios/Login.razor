@@ -1,10 +1,33 @@
 ﻿@page "/login"
+@inherits LoginUsuarioPage
 
-<OtherValue User="@Logged">
-    <p>apsdkaposdkapsdkapskdapdkaop</p>
-</OtherValue>
+<PageTitle>Home</PageTitle>
+<MudContainer MaxWidth="MaxWidth.Medium">
 
-@code
-{
-    public string Logged = "email.teste@gmail.com";
-}
+    <MudText Typo="Typo.h4" Class="mt-10 mb-6">Login</MudText>
+
+    <MudButton EndIcon="@Icons.Material.Filled.Create" Href="/">Cadastrar</MudButton>
+
+    <EditForm Model="@InputModel" Context="UsuarioForm" OnValidSubmit="OnValidSubmitAsync">
+        <DataAnnotationsValidator />
+
+
+        <MudTextField Label="Email"
+                      HelperText="Campo obrigatório"
+                      @bind-Value="InputModel.Email"
+                      For="@(() => InputModel.Email)" />
+
+        <MudTextField Label="Senha"
+                      HelperText="Campo obrigatório"
+                      @bind-Value="InputModel.Senha"
+                      For="@(() => InputModel.Senha)"
+                      InputType="@InputType.Password" />
+
+        <MudButton ButtonType="ButtonType.Submit"
+                   Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   Class="mt-8 mb-10">
+            Cadastrar
+        </MudButton>
+    </EditForm>
+</MudContainer>

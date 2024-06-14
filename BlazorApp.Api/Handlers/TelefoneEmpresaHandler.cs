@@ -76,11 +76,7 @@ namespace BlazorApp.Api.Handlers
         {
             try
             {
-                var query = context
-                .TelefonesEmpresa
-                .AsNoTracking()
-                .Where(x => x.EmpresaId == request.EmpresaId)
-                .OrderBy(x => x.Empresa);
+                var query = context.TelefonesEmpresa.AsNoTracking().Where(x => x.EmpresaId == request.EmpresaId).OrderBy(x => x.Empresa);
                 var telefones = await query
                     .Skip((request.PageNumber - 1) * request.PageSize)
                     .Take(request.PageSize)

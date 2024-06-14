@@ -1,0 +1,54 @@
+﻿@page "/treinamentos"
+@inherits GetAllTreinamentoPage
+
+<MudContainer MaxWidth="MaxWidth.ExtraLarge">
+    <MudText Typo="Typo.h4" Class="mt-10 mb-6">Treinamentos</MudText>
+    <div class="d-flex justify-end">
+        <MudButton Size="@Size.Medium" Href="/treinamentos/cadastrar" Color="@Color.Success" StartIcon="@Icons.Material.Filled.AddCircleOutline" Class="add-item-btn">Adicionar Treinamento</MudButton>
+    </div>
+
+    <MudDataGrid T="Treinamento"
+                 Class="mt-1 mb-15"
+                 Items="@Treinamentos"
+                 Filterable="true"
+                 QuickFilter="@_quickFilter"
+                 Bordered="true">
+        <Columns>
+            <TemplateColumn StickyRight="true" Filterable="false" Sortable="false">
+                <CellTemplate>
+                    <MudGrid Justify="@Justify.Center">
+                        <MudIconButton Size="@Size.Small"
+                                       Icon="@Icons.Material.Filled.RemoveRedEye"
+                                       Color="Color.Primary"
+                                       Href="@($"/treinamentos/visualizar/{context.Item.Id}")" />
+                    </MudGrid>
+                </CellTemplate>
+            </TemplateColumn>
+            <TemplateColumn Title="Curso">
+                <CellTemplate>
+                    @(context.Item.Curso?.Nome ?? "N/A")
+                </CellTemplate>
+            </TemplateColumn>
+            <!--<PropertyColumn Property="x=>x.Empresas" Title="Empresa" /> -->
+            <!--<PropertyColumn Property="x=>x.Alunos" Title="Alunos" /> -->
+            <PropertyColumn Property="x=>x.DataCriacao" Title="Data de criação" />
+            <PropertyColumn Property="x=>x.Tipo" Title="Tipo" />
+            <!--<PropertyColumn Property="x=>x.Instrutores" Title="Instrutor" /> -->
+            <PropertyColumn Property="x=>x.Situacao" Title="Situação" />
+            <TemplateColumn StickyRight="true" Filterable="false" Sortable="false">
+                <CellTemplate>
+                    <MudGrid Justify="@Justify.Center">
+                        <MudIconButton Size="@Size.Small"
+                                       Icon="@Icons.Material.Filled.Delete"
+                                       Color="Color.Error"
+                                       OnClick="() => OnDeleteButtonActive(context.Item.Id, context.Item.Curso.Nome, context.Item.DataCriacao)" />
+                    </MudGrid>
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+        <PagerContent>
+            <MudDataGridPager T="@Treinamento" />
+        </PagerContent>
+    </MudDataGrid>
+
+</MudContainer>

@@ -1,55 +1,50 @@
 ﻿using BlazorApp.Shared.Handlers;
+using BlazorApp.Shared.Models;
 using BlazorApp.Shared.Requests.Usuarios;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
 namespace BlazorApp.Web.Pages.Usuarios
 {
-    public partial class CreateUsuarioPage : ComponentBase
+    public partial class LoginUsuarioPage : ComponentBase
     {
         #region Properties
         public bool IsBusy { get; set; } = false;
-        public CreateUsuarioRequest InputModel { get; set; } = new();
+        public GetUsuarioBySenhaEmailRequest InputModel { get; set; } = new();
 
         #endregion
 
         #region Services
         [Inject]
-        public IUsuarioHandler Handler { get; set; } = null!;
+        public ISnackbar Snackbar { get; set; }
         [Inject]
         public NavigationManager NavigationManager { get; set; } = null!;
         [Inject]
-        public ISnackbar Snackbar { get; set; } = null!;
+        public IUsuarioHandler Handler { get; set; } = null!;
         #endregion
 
         #region Methods
         public async Task OnValidSubmitAsync()
         {
-            IsBusy = true;
-
             try
             {
-                var result = await Handler.CreateAsync(InputModel);
-
-                if (result.IsSuccess)
+                var result = await Handler.GetByCredenciais(InputModel);
+                if (result is { IsSuccess: true })
                 {
-                    Snackbar.Add(result.Message, Severity.Success);
-                    NavigationManager.NavigateTo("/");
+                    Snackbar.Add("Logado!", Severity.Success);
+                    NavigationManager.NavigateTo("/HomePage");
                 }
                 else
                 {
-                    Snackbar.Add(result.Message, Severity.Error);
+                    Snackbar.Add("Credenciais Invalidas!", Severity.Warning);
                 }
             }
             catch (Exception ex)
             {
                 Snackbar.Add(ex.Message, Severity.Error);
             }
-            finally
-            {
-                IsBusy = false;
-            }
         }
         #endregion
+
     }
 }

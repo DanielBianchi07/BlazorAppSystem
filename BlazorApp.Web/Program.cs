@@ -24,5 +24,15 @@ builder.Services.AddTransient<IConteudoProgramaticoHandler, ConteudoProgramatico
 builder.Services.AddTransient<IInstrutorHandler, InstrutorHandler>();
 builder.Services.AddTransient<ICursoHandler, CursoHandler>();
 builder.Services.AddTransient<ITelefoneEmpresaHandler, TelefoneEmpresaHandler>();
+builder.Services.AddTransient<IProvaHandler, ProvaHandler>();
+builder.Services.AddTransient<IQuestaoHandler, QuestaoHandler>();
+builder.Services.AddTransient<IAlternativaHandler, AlternativaHandler>();
+builder.Services.AddTransient<ITreinamentoHandler, TreinamentoHandler>();
+builder.Services.AddTransient<ICertificadoHandler, CertificadoHandler>();
+builder.Services.AddTransient<IUsuarioHandler, UsuarioHandler>();
+
+
+
+
 
 await builder.Build().RunAsync();
