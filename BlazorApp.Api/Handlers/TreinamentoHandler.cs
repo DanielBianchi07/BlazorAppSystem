@@ -85,7 +85,9 @@ namespace BlazorApp.Api.Handlers
         {
             try
             {
+
                 var treinamento = await context.Treinamentos.FirstOrDefaultAsync(x => x.Id == request.Id);
+                
 
                 if (treinamento == null)
                     return new Response<Treinamento?>(null, 404, "Treinamento não encontrado para remoção");
@@ -107,13 +109,13 @@ namespace BlazorApp.Api.Handlers
             {
                 var query = context
                     .Treinamentos
+                    .Include(x => x.Alunos)
+                    .ThenInclude(x => x.Empresas)
                     .AsNoTracking()
                     .OrderBy(x => x.DataCriacao);
 
-                var treinamento = await query
-                    .Skip((request.PageNumber - 1) * request.PageSize)
-                    .Take(request.PageSize)
-                    .ToListAsync();
+
+                var treinamento = await query.ToListAsync();
 
                 var count = await query.CountAsync();
                 return new PagedResponse<List<Treinamento>?>(treinamento, count, request.PageNumber, request.PageSize);
